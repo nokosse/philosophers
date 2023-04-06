@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/05 19:09:41 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:33:55 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	valid_args_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	(void)av;
+	int a = ft_strlen(av[1]);
+	printf("%d\n", a);
 	if (!valid_args_check(ac, av))
 		return (1);
 	printf("Correct arguments\n");

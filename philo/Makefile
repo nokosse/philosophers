@@ -6,48 +6,42 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/05 19:29:38 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/06 15:11:52 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compilateur
+NAME = philo
+SRCS = main.c
+
+OBJS = $(SRCS:src/%.c=obj/%.o)
+HEADERS = philo.h
+NOTLIBFT = notlibft/libnotlibft.a
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
-# Options de compilation
-CFLAGS = -Wall -Wextra -Werror
+all:
+	@$(MAKE) $(NAME)
 
-# Nom du programme
-NAME = philo
+$(NAME): $(OBJS) $(HEADERS) $(NOTLIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(NOTLIBFT)
 
-# Répertoires
-SRC_DIR = src
-OBJ_DIR = obj
-
-# Fichiers source
-SRC = main.c \
-
-# Fichiers objet
-OBJ = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
-
-# Règles
-all: $(NAME)
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -Lnotlibft -lnotlibft -o $(NAME)
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+obj/%.o: src/%.c $(HEADERS)
+	mkdir -p obj
 	$(CC) $(CFLAGS) -c $< -o $@
 
+obj/main.o: main.c $(HEADERS)
+	mkdir -p obj
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NOTLIBFT):
+	make -C notlibft
+
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf obj
+	@make -C notlibft clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C notlibft fclean
 
 re: fclean all
-
-.PHONY: all clean fclean re

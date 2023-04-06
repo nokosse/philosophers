@@ -6,11 +6,11 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:26:39 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/05 17:54:07 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/06 14:54:51 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = notlibft.a
+NAME = libnotlibft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
