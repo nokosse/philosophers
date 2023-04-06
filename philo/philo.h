@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:24:14 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/05 19:00:48 by kvisouth         ###   ########.fr       */
+/*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
+/*   Updated: 2023/04/05 18:40:26 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/notlibft.h"
+#ifndef PHILO_H
+# define PHILO_H
 
-long	ft_atol(const char *str)
-{
-	int		i;
-	int		sign;
-	long	nb;
+# include "notlibft/inc/notlibft.h"
+#include <sys/time.h>
+#include <pthread.h>
 
-	i = 0;
-	sign = 1;
-	nb = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + str[i] - '0';
-		i++;
-	}
-	return (nb * sign);
-}
+#endif

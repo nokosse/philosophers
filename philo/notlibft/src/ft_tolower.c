@@ -6,11 +6,13 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:29:35 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/05 17:57:05 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/05 19:01:02 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/notlibft.h"
+
+int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		c += 32;

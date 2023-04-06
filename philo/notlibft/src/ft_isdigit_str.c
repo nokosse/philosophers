@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_isdigit_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:24:14 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/05 19:00:48 by kvisouth         ###   ########.fr       */
+/*   Created: 2023/04/05 19:10:18 by kvisouth          #+#    #+#             */
+/*   Updated: 2023/04/05 19:10:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/notlibft.h"
 
-long	ft_atol(const char *str)
+int	ft_isdigit_str(char *str)
 {
-	int		i;
-	int		sign;
-	long	nb;
+	int	i;
 
 	i = 0;
-	sign = 1;
-	nb = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i])
 	{
-		if (str[i] == '-')
-			sign = -1;
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + str[i] - '0';
-		i++;
-	}
-	return (nb * sign);
+	return (1);
 }
