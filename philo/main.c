@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/07 13:52:28 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:44:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int ac, char **av)
 {
 	(void)av;
-	if (!valid_args_check(ac, av))
-		return (1);
+	if (!valid_args_check(ac, av) || !check_int_max(av))
+		return (write(2, "Error: Invalid arguments\n", 25), 0);
 	printf("Correct arguments\n");
-	return (0);
+	return (1);
 }
