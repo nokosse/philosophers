@@ -6,14 +6,14 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/07 14:31:09 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/11 14:23:13 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SRC = main.c \
 	src/parse_args.c
-OBJ = $(SRC:%.c=%.o)
+OBJ = $(addprefix obj/, $(SRC:.c=.o))
 HEADERS = philo.h
 NOTLIBFT = notlibft/libnotlibft.a
 CFLAGS = -Wall -Wextra -Werror
@@ -24,14 +24,15 @@ all: $(NAME)
 $(NAME): $(OBJ) $(HEADERS) $(NOTLIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NOTLIBFT)
 
-%.o: %.c $(HEADERS)
+obj/%.o: %.c $(HEADERS)
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NOTLIBFT):
 	make -C notlibft
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf obj
 	@make -C notlibft clean
 
 fclean: clean
