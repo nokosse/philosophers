@@ -6,13 +6,24 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 15:10:02 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:47:51 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// Just the error message displayed when the arguments are invalid.
+// This function will return the current time in milliseconds.
+long	time_ms(void)
+{
+	struct timeval	tv;
+	long			res;
+
+	gettimeofday(&tv, NULL);
+	res = 1000 * (size_t)tv.tv_sec + (size_t)tv.tv_usec / 1000;
+	return (res);
+}
+
+// This function will just print the error message.
 void	invalid_args_msg(void)
 {
 	printf("Error	: Invalid arguments\n\n");
@@ -40,6 +51,6 @@ int	main(int ac, char **av)
 		return (printf("Error	: arguments 1 or 5 must be at least 1.\n"), 0);
 	init_mutexes(&args);
 	init_philos(&args);
-	// init_threads(&args);
+	init_threads(&args);
 	return (1);
 }
