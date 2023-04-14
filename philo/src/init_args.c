@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:08:31 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 14:33:18 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:44:07 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // (number of philosophers or number of meals)
 int	init_args(t_arg *args, int ac, char **av)
 {
-	args->is_dead = 0;	
+	args->is_dead = 0;
 	args->philo_num = ft_atoi(av[1]);
 	args->time_to_die = ft_atoi(av[2]);
 	args->time_to_eat = ft_atoi(av[3]);
