@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 16:50:31 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:25:05 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int		init_args(t_arg *args, int ac, char **av);
 void	init_mutexes(t_arg *args);
 void	init_philos(t_arg *args);
 void	init_threads(t_arg *args);
+
+// Routine of philosophers functions
+void	*check_death(void *args);
 
 // Extra functions
 long	time_ms(void);

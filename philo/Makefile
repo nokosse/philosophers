@@ -6,7 +6,7 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/14 16:50:53 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/14 17:25:31 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC = main.c \
 	src/init_args.c \
 	src/init_mutex.c \
 	src/init_philo.c \
-	src/init_thread.c
+	src/init_thread.c \
+	src/routine_death.c
 
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 HEADERS = philo.h
