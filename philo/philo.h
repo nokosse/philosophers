@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 14:24:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:05:20 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@
 // With some other variables to be used in the program
 typedef struct s_arg
 {
-	int		philo_num;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int 	meals_num;
-	int		is_dead;
-	time_t	start_time;
-	int		philo_id;
-}			t_arg;
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int 			meals_num;
+	int				is_dead;
+	time_t			start_time;
+	int				philo_id;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_lock;
+}					t_arg;
 
 // The structure to store the philosophers
 // With some more useful information on them.
@@ -46,10 +48,12 @@ typedef struct s_philo
 }				t_philo;
 
 // Argument check functions
-int	valid_args_check(int ac, char **av);
-int	check_int_max(char **av);
+int		valid_args_check(int ac, char **av);
+int		check_int_max(char **av);
 
 // Initialization functions
-int	init_args(t_arg *args, int ac, char **av);
+int		init_args(t_arg *args, int ac, char **av);
+void	init_mutexes(t_arg *args);
+
 
 #endif

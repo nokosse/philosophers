@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 14:29:15 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:03:35 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 		return (invalid_args_msg(), 0);
 	if (!init_args(&args, ac, av))
 		return (printf("Error	: arguments 1 or 5 must be at least 1.\n"), 0);
-	// init_mutexes(&args);
+	init_mutexes(&args);
 	// init_philos(&args);
 	// init_threads(&args);
 	return (1);
