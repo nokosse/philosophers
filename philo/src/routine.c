@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:50:41 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 17:42:42 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:12:42 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	*ft_process(void *args)
 	t_philo		*philo;
 
 	philo = (t_philo *)args;
-	philo->last_meal = ft_time();
-	philo->start_time = ft_time();
+	philo->last_meal = ms_now();
+	philo->start_time = ms_now();
 	while (!philo->arg->is_dead)
 	{
 		if (philo->arg->is_dead || philo->stop || ft_cnt_of_meals(philo))

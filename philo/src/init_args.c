@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:03 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 17:42:56 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:12:17 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_philos(t_arg *args)
 		philos[i].time_to_eat = args->time_to_eat;
 		philos[i].time_to_sleep = args->time_to_sleep;
 		philos[i].time_to_die = args->time_to_die;
-		philos[i].last_meal = ft_time();
+		philos[i].last_meal = ms_now();
 		philos[i].limit_death = args->time_to_die;
 		philos[i].stop = 0;
 		philos[i].left_fork = \

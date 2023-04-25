@@ -6,37 +6,42 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 17:28:29 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:11:57 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// Why not ?
-void	invalid_args_msg(void)
-{
-	printf("Error	: Invalid arguments\n\n");
-	printf("Usage	: ./philo arg1 arg2 arg3 arg4 (arg5)\n");
-	printf("arg1 	: 🚹number_of_philosophers\n");
-	printf("arg2	: 💀time_to_die (ms)\n");
-	printf("arg3	: 🍝time_to_eat (ms)\n");
-	printf("arg4	: 💤time_to_sleep (ms)\n");
-	printf("(arg5)	: number_of_times_each_philosopher_must_eat\n\n");
-	printf("Example	: ./philo 5 800 200 200\n");
-	printf("Example	: ./philo 5 800 200 200 7\n");
-}
-
 void	ft_usleep(int ms)
 {
 	long	time;
 
-	time = ft_time();
+	time = ms_now();
 	usleep(ms * 920);
-	while (ft_time() < time + ms)
+	while (ms_now() < time + ms)
 		usleep(ms * 3);
 }
 
-long	ft_time(void)
+// ms_now is a very useful function in all the program.
+// This function will return the actual time in milliseconds.
+//
+// We initialize a timeval structure. It's a structure that contains 2 members:
+// tv_sec and tv_usec.
+// tv_sec : stores the number of seconds since the Epoch.
+// tv_usec : stores the number of microseconds since the last second.
+//
+// the gettimeofday() function fills the structure with the actual time.
+// The first argument &tv is the address of the structure. (timeval)
+// The second argument is the timezone. We don't need it so we put NULL.
+//
+// We then calculate the elapsed time between the Epoch and the actual time
+// in milliseconds, and stores the result in 'res'.
+// It multiplies the seconds by 1000 to convert them to milliseconds.
+// And it divides the microseconds by 1000 to get the decimal part of the
+// milliseconds.
+//
+// Then it returns the result.
+long	ms_now(void)
 {
 	struct timeval	tv;
 	long			res;
@@ -52,19 +57,6 @@ void	free_all(t_arg *args)
 	free(args->philos);
 	free(args->forks);
 }
-
-// The goal of philosopher is to understand the basics of threads and mutexes.
-// A philosopher is a thread. And the forks they eat with are mutexes.
-// Every threads must have 2 mutexes to eat.
-// But Every threads have only 1 mutex. So they must share it.
-//
-// arg1 = number_of_philosophers
-// arg2 = time_to_die (ms)
-// arg3 = time_to_eat (ms)
-// arg4 = time_to_sleep (ms)
-// arg5 = number_of_times_each_philosopher_must_eat
-//
-// When the philosopher eats, it resets its timer. (time_to_die)
 
 int	main(int ac, char **av)
 {

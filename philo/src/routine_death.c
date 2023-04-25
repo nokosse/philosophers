@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:51:14 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 18:06:13 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:12:27 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	died_philo(t_philo *philo, int i)
 {
 	philo->arg->is_dead = 1;
 	pthread_mutex_lock(&philo->lock_print);
-	printf("%ldms philo[%d] died 💀💀\n", ft_time() - philo->start_time,
+	printf("%ldms philo[%d] died 💀💀\n", ms_now() - philo->start_time,
 		philo[i].id + 1);
 	i = -1;
 	while (i < philo[i].total_philos)
@@ -59,7 +59,7 @@ void	*monitoring(void *args)
 		i = -1;
 		while (++i < philo->total_philos)
 		{
-			time_now = ft_time();
+			time_now = ms_now();
 			if (time_now - philo[i].last_meal > philo[i].limit_death)
 			{
 				died_philo(philo, i);
