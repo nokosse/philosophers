@@ -6,12 +6,26 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 19:11:57 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:28:31 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// Why we need to write our own usleep function?
+// Because the usleep function is not precise enough.
+// The original usleep will sleep for at least the time specified in its
+// argument. But the time specified may be rounded up to the nearest or 
+// truncated to the nearest system clock tick. Meaning that the real time
+// slept may be longer or shorter than the time specified, and that's why
+// usleep is not precise enough.
+//
+// So we write our own usleep that is more precise. How ?
+// It measures the actual time in milliseconds, then uses a whie loop to
+// sleep for the time specified in the argument. But this may be more
+// ressource consuming than the original usleep.
+// To make it quick, it's more precise because we use the 'ms_now' function
+// and we do some maths with milliseconds.
 void	ft_usleep(int ms)
 {
 	long	time;
