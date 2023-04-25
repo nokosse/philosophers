@@ -6,11 +6,25 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 16:47:51 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:29:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// We have to create our own usleep function because the usleep function
+// is not precise enough. We will use the gettimeofday function to get the
+// current time in milliseconds, and we will compare it to the start time
+// to know how much time has passed.
+void	ft_usleep(int ms)
+{
+	long	time;
+
+	time = time_ms();
+	usleep(ms * 1000);
+	while (time_ms() - time < ms)
+		usleep(ms * 3);
+}
 
 // This function will return the current time in milliseconds.
 long	time_ms(void)
@@ -52,5 +66,7 @@ int	main(int ac, char **av)
 	init_mutexes(&args);
 	init_philos(&args);
 	init_threads(&args);
+	kill_threads(&args);
+	kill_mutexes(&args);
 	return (1);
 }

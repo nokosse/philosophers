@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:47:52 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 17:26:33 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:27:22 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,24 @@ void	init_threads(t_arg *args)
 	while (total_philos > 0)
 	{
 		pthread_create(&threads[total_philos], NULL, routine,
-			(void *)&args->philo_num[total_philos]);
+			(void *)&args->philos[total_philos]);
 		total_philos--;
 	}
-	pthread_create(&thread_ids, NULL, check_death, (void *)args->philo_num);
+	pthread_create(&thread_ids, NULL, check_death, (void *)args->philos);
 	pthread_join(thread_ids, NULL);
 	args->thread_ids = threads;
+}
+
+void	kill_threads(t_arg *args)
+{
+	int	total_philos;
+
+	total_philos = args->philo_num;
+	if (total_philos == 1)
+		pthread_mutex_unlock(&args->forks[0]);
+	while (total_philos)
+	{
+		total_philos--;
+		pthread_join(args->thread_ids[total_philos], NULL);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/14 17:25:05 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:29:20 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 typedef struct s_arg
 {
 	int				philo_num;
+	pthread_t		*thread_ids;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -67,11 +68,20 @@ int		init_args(t_arg *args, int ac, char **av);
 void	init_mutexes(t_arg *args);
 void	init_philos(t_arg *args);
 void	init_threads(t_arg *args);
+void	kill_threads(t_arg *args);
+void	kill_mutexes(t_arg *args);
 
 // Routine of philosophers functions
+void	*routine(void *args);
+int		meals_count(t_philo *philo);
 void	*check_death(void *args);
+void	take_forks(t_philo *philo);
+void	eat(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	think(t_philo *philo);
 
 // Extra functions
 long	time_ms(void);
+void	ft_usleep(int ms);
 
 #endif
