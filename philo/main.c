@@ -6,38 +6,13 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 15:29:06 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:28:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// We have to create our own usleep function because the usleep function
-// is not precise enough. We will use the gettimeofday function to get the
-// current time in milliseconds, and we will compare it to the start time
-// to know how much time has passed.
-void	ft_usleep(int ms)
-{
-	long	time;
-
-	time = time_ms();
-	usleep(ms * 1000);
-	while (time_ms() - time < ms)
-		usleep(ms * 3);
-}
-
-// This function will return the current time in milliseconds.
-long	time_ms(void)
-{
-	struct timeval	tv;
-	long			res;
-
-	gettimeofday(&tv, NULL);
-	res = 1000 * (size_t)tv.tv_sec + (size_t)tv.tv_usec / 1000;
-	return (res);
-}
-
-// This function will just print the error message.
+// Why not ?
 void	invalid_args_msg(void)
 {
 	printf("Error	: Invalid arguments\n\n");
@@ -51,22 +26,59 @@ void	invalid_args_msg(void)
 	printf("Example	: ./philo 5 800 200 200 7\n");
 }
 
-// 1. We check the arguments.
-// 2. We initialize the arguments to use them later. (t_arg args)
-// 3. We initialize the mutexes. (forks, print, death)
-// 4. We initialize the threads. (philosophers)
+void	ft_usleep(int ms)
+{
+	long	time;
+
+	time = ft_time();
+	usleep(ms * 920);
+	while (ft_time() < time + ms)
+		usleep(ms * 3);
+}
+
+long	ft_time(void)
+{
+	struct timeval	tv;
+	long			res;
+
+	gettimeofday(&tv, NULL);
+	res = 1000 * (size_t)tv.tv_sec + (size_t)tv.tv_usec / 1000;
+	return (res);
+}
+
+void	free_all(t_arg *args)
+{
+	free(args->threads_id);
+	free(args->philos);
+	free(args->forks);
+}
+
+// The goal of philosopher is to understand the basics of threads and mutexes.
+// A philosopher is a thread. And the forks they eat with are mutexes.
+// Every threads must have 2 mutexes to eat.
+// But Every threads have only 1 mutex. So they must share it.
+//
+// arg1 = number_of_philosophers
+// arg2 = time_to_die (ms)
+// arg3 = time_to_eat (ms)
+// arg4 = time_to_sleep (ms)
+// arg5 = number_of_times_each_philosopher_must_eat
+//
+// When the philosopher eats, it resets its timer. (time_to_die)
+
 int	main(int ac, char **av)
 {
 	t_arg	args;
 
 	if (!valid_args_check(ac, av) || !check_int_max(av))
 		return (invalid_args_msg(), 0);
-	if (!init_args(&args, ac, av))
-		return (printf("Error	: arguments 1 or 5 must be at least 1.\n"), 0);
+	if (init_args(&args, ac, av) == 1)
+		return (0);
 	init_mutexes(&args);
 	init_philos(&args);
 	init_threads(&args);
 	kill_threads(&args);
 	kill_mutexes(&args);
+	free_all(&args);
 	return (1);
 }

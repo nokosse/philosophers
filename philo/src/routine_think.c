@@ -5,17 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 14:37:24 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 14:53:50 by kvisouth         ###   ########.fr       */
+/*   Created: 2023/04/07 16:47:21 by kvisouth          #+#    #+#             */
+/*   Updated: 2023/04/25 18:13:13 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	think(t_philo *philo)
+// Philo will think for time_to_think ms
+void	thinking(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->print_lock);
-	printf("%ldms philo[%d] is thinking 🤔\n",
-		time_ms() - philo->start, philo->id + 1);
-	pthread_mutex_unlock(&philo->print_lock);
+	pthread_mutex_lock(&philo->lock_print);
+	printf("%ldms philo[%d] 🤔💭 is thinking\n", \
+		ft_time() - philo->start_time, philo->id + 1);
+	pthread_mutex_unlock(&philo->lock_print);
 }

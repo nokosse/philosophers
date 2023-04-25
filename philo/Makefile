@@ -6,48 +6,43 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/25 14:57:50 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/25 18:35:21 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SRC = main.c \
-	src/parse_args.c \
+	src/notlibft.c \
 	src/init_args.c \
 	src/init_mutex.c \
-	src/init_philo.c \
-	src/init_thread.c \
+	src/init_threads.c \
+	src/parse_args.c \
 	src/routine_death.c \
 	src/routine_eat.c \
+	src/routine_forks.c \
 	src/routine_sleep.c \
 	src/routine_think.c \
-	src/routine_utils.c \
-
+	src/routine.c
+	
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 HEADERS = philo.h
-NOTLIBFT = notlibft/libnotlibft.a
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADERS) $(NOTLIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NOTLIBFT)
+$(NAME): $(OBJ) $(HEADERS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 obj/%.o: %.c $(HEADERS)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NOTLIBFT):
-	make -C notlibft
-
 clean:
 	@rm -rf obj
-	@make -C notlibft clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C notlibft fclean
+	@rm -rf $(NAME)
 
 re: fclean all
 
