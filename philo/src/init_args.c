@@ -6,13 +6,17 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:03 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 19:12:17 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:02:52 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 // This function will init the 't_philo' structure with the arguments.
+// Special mention to forks ;
+// philos[i].right_fork = &args->forks[(philos[i].id + 1) % args->total_philos];
+// This line means that the right fork of the philosopher is the fork at the
+// right of the philosopher.
 void	init_philos(t_arg *args)
 {
 	int		i;
@@ -32,10 +36,9 @@ void	init_philos(t_arg *args)
 		philos[i].last_meal = ms_now();
 		philos[i].limit_death = args->time_to_die;
 		philos[i].stop = 0;
-		philos[i].left_fork = \
-			&args->forks[philos[i].id];
-		philos[i].right_fork = \
-			&args->forks[(philos[i].id + 1) % args->total_philos];
+		philos[i].left_fork = &args->forks[philos[i].id];
+		philos[i].right_fork = &args->forks[(philos[i].id + 1)
+			% args->total_philos];
 		philos[i].arg = args;
 		i++;
 	}

@@ -6,17 +6,18 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:47:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 19:12:31 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:58:43 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 // This function prints that the philosopher is eating.
-// It also updates the total meals eaten by the philosopher.
-// It also updates the last meal time of the philosopher.
 //
-// We lock the mutexes to print.
+// We increment the total meals of the philosopher by 1.
+// Then we refresh the last meal time of the philosopher to now.
+// Then we sleep for the time to eat.
+// Finally we unlock the forks. (they were locked in taking_forks() function)
 void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->lock_print);

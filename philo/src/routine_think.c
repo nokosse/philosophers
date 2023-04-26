@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:47:21 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 19:12:39 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:32:54 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	thinking(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->lock_print);
-	printf("%ldms philo[%d] 🤔💭 is thinking\n", \
-		ms_now() - philo->start_time, philo->id + 1);
+	printf("%ldms philo[%d] 🤔💭 is thinking\n", ms_now() - philo->start_time,
+		philo->id + 1);
 	pthread_mutex_unlock(&philo->lock_print);
 }

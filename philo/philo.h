@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 19:21:43 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:20:04 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,13 @@ void	taking_forks(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
+void	dying(t_philo *philo, int i);
 
 long	ms_now(void);
 void	invalid_args_msg(void);
 int		ft_cnt_of_meals(t_philo *philo);
 void	*monitoring(void *args);
-void	*ft_process(void *args);
+void	*philo_routine(void *args);
 void	init_philos(t_arg *args);
 void	init_mutexes(t_arg *args);
 void	kill_mutexes(t_arg *args);

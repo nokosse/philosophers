@@ -6,18 +6,18 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:23 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 17:55:47 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:17:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 // This function will init the threads.
-// In the whole program, there are 2 threads:
-// 1. threads: the thread for each philosopher.
-//	If there is 4 philosophers, there will be 4 threads..
-// 2. s_tid: the thread for the monitor.
-//	The monitor thread will check the status of the philosophers.
+// In the whole program, there are 2 (types of) threads:
+// 1. the monitoring thread, which is 's_tid'.
+//		It will continuously check if the philos are alive.
+// 2. the philo threads, which are 'threads'.
+//		They will execute the philo_routine function. (eat, sleep...)
 void	init_threads(t_arg *args)
 {
 	int			nbr_ph;
@@ -26,9 +26,12 @@ void	init_threads(t_arg *args)
 
 	nbr_ph = args->total_philos;
 	threads = malloc(sizeof(pthread_t) * nbr_ph);
-	while (nbr_ph--)
-		pthread_create(&threads[nbr_ph], \
-			NULL, ft_process, (void *)&args->philos[nbr_ph]);
+	while (nbr_ph)
+	{
+		nbr_ph--;
+		pthread_create(&threads[nbr_ph], NULL, philo_routine,
+			(void *)&args->philos[nbr_ph]);
+	}
 	pthread_create(&s_tid, NULL, monitoring, (void *)args->philos);
 	pthread_join(s_tid, NULL);
 	args->threads_id = threads;
