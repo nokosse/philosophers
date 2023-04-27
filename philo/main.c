@@ -6,20 +6,20 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/27 13:53:37 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:59:48 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// The routine part of the philosophers will be executed in 'init_threads'.
 int	main(int ac, char **av)
 {
 	t_arg	args;
 
 	if (!valid_args_check(ac, av) || !check_int_max(av))
 		return (invalid_args_msg(), 0);
-	if (init_args(&args, ac, av) == 1)
-		return (0);
+	init_args(&args, ac, av);
 	init_mutexes(&args);
 	init_philos(&args);
 	init_threads(&args);

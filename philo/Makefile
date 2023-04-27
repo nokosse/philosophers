@@ -6,7 +6,7 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/04/25 18:35:21 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/04/27 14:00:07 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = main.c \
 	src/routine_forks.c \
 	src/routine_sleep.c \
 	src/routine_think.c \
-	src/routine.c
+	src/routine.c \
+	src/utils.c \
 	
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 HEADERS = philo.h
