@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/26 16:20:04 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:53:26 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,29 @@ int		ft_isdigit(int c);
 // Arguments parsing
 int		valid_args_check(int ac, char **av);
 int		check_int_max(char **av);
+void	invalid_args_msg(void);
+
+// Initialization of structures
+void	init_philos(t_arg *args);
+int		init_args(t_arg *args, int argc, char **argv);
+void	free_args(t_arg *args);
+void	init_mutexes(t_arg *args);
+void	kill_mutexes(t_arg *args);
+void	init_threads(t_arg *args);
+void	kill_threads(t_arg *args);
 
 // Philosophers routine
+void	*monitoring(void *args);
+int		ft_cnt_of_meals(t_philo *philo);
+void	*philo_routine(void *args);
 void	taking_forks(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
 void	dying(t_philo *philo, int i);
 
+// Utils
 long	ms_now(void);
-void	invalid_args_msg(void);
-int		ft_cnt_of_meals(t_philo *philo);
-void	*monitoring(void *args);
-void	*philo_routine(void *args);
-void	init_philos(t_arg *args);
-void	init_mutexes(t_arg *args);
-void	kill_mutexes(t_arg *args);
-void	init_threads(t_arg *args);
-void	kill_threads(t_arg *args);
-int		init_args(t_arg *args, int argc, char **argv);
-void	free_all(t_arg *args);
-void	unlock_and_destroy_mutex(t_arg *args);
 void	ft_usleep(int ms);
 
 #endif

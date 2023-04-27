@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:03 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/26 16:02:52 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:54:37 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,13 @@ int	init_args(t_arg *args, int argc, char **argv)
 			return (0);
 	}
 	return (0);
+}
+
+// This function will free the mallocs of the arguments.
+// (in the structure 't_arg')
+void	free_args(t_arg *args)
+{
+	free(args->threads_id);
+	free(args->philos);
+	free(args->forks);
 }

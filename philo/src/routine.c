@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:50:41 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/26 18:58:26 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:54:51 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	*monitoring(void *args)
 	t_philo	*philo;
 	long	time_now;
 	int		i;
-x
+
 	philo = (t_philo *)args;
 	i = 0;
 	while (philo[i].stop == 0)
