@@ -6,12 +6,16 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:50:41 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:51 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:07:20 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+// This function is used to count the number of meals eaten by the philosophers.
+// It's used to check if the philos have eaten the required number of times.
+// We check if total_meals > 0, to check if the optional argument is present.
+// If there is no optional argument, we directly return 0.
 int	count_meals(t_philo *philo)
 {
 	int	flag_enough;
@@ -46,7 +50,7 @@ void	*philo_routine(void *args)
 	philo = (t_philo *)args;
 	philo->last_meal = ms_now();
 	philo->start_time = ms_now();
-	while (!philo->arg->is_dead)
+	while (philo->arg->is_dead == 0)
 	{
 		if (philo->arg->is_dead || philo->stop || count_meals(philo))
 			return (NULL);
@@ -69,12 +73,12 @@ void	*philo_routine(void *args)
 // This function is used to 'keep an eye' on the philosophers.
 // It checks the state of every philosophers to check if they are dying.
 //
-// The loop checks the philosopher's last meal time one by one.
+// The loop checks one by one philosopher's last meal time.
 // It then compares the elapsed time between 'last_meal' and 'limit_death'.
 // last_meal is the time when the philosopher last ate.
 // limit_death is (max) time that the philosopher can live without eating.
-// If the elapsed time is greater than limit_death, the philosopher dies.
-// We then call the dying function. (see above)
+// If the elapsed time is greater than limit_death, we call the function that
+// kills the philosopher (kill_philo).
 //
 // For the optional argument, which is optional, we just check if all the
 // philosophers have eaten the required number of times.
@@ -98,7 +102,7 @@ void	*monitoring(void *args)
 			time_now = ms_now();
 			if (time_now - philo[i].last_meal > philo[i].limit_death)
 			{
-				dying(philo, i);
+				kill_philo(philo, i);
 				return (NULL);
 			}
 		}

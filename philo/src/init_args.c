@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:03 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:37 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/28 13:56:58 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	init_philos(t_arg *args)
 }
 
 // This function will init the 't_arg' structure with the arguments.
+// In all the if conditions we are checking if the arguments are at least 1.
+// We are checking this for the following arguments :
+// - total_philos, which is the total number of philosophers around the table.
+// - nbr_of_meals, which is the optional argument that will stop the simulation.
 int	init_args(t_arg *args, int argc, char **argv)
 {
 	args->total_philos = ft_atoi(argv[1]);

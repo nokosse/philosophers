@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:54:08 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/26 18:20:37 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:46:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	kill_mutexes(t_arg *args)
 	int	philos;
 
 	philos = args->total_philos;
-	while (philos--)
+	while (philos)
 	{
+		philos--;
 		pthread_mutex_unlock(&args->forks[philos]);
 		pthread_mutex_destroy(&args->forks[philos]);
 	}
