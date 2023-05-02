@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/27 15:46:01 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:36:16 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_threads(t_arg *args);
 void	kill_threads(t_arg *args);
 
 // Philosophers routine
-void	*monitoring(void *args);
+void	*dead_checker(void *args);
 int		ft_cnt_of_meals(t_philo *philo);
 void	*philo_routine(void *args);
 void	taking_forks(t_philo *philo);

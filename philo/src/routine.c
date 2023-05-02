@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:50:41 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/28 14:07:20 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:35:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int	count_meals(t_philo *philo)
 }
 
 // This function is the thread of every philosopher.
+// In the loop, it always checks if :
+// - the philosopher is dead
+// - the flag 'stop' is set to 1
+// - the philosopher has eaten enough (optionnal argument)
+// If one of these conditions is true, the function returns NULL.
+// Else, it continues.
 void	*philo_routine(void *args)
 {
 	t_philo		*philo;
@@ -86,7 +92,7 @@ void	*philo_routine(void *args)
 //
 // It's executed by a thread, this is the second type of thread in question.
 // It's called a monitoring thread.
-void	*monitoring(void *args)
+void	*dead_checker(void *args)
 {
 	t_philo	*philo;
 	long	time_now;

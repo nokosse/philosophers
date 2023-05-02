@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 13:45:55 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/25 18:54:03 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:20:38 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	invalid_args_msg(void)
 {
 	printf("Error	: Invalid arguments\n\n");
 	printf("Usage	: ./philo arg1 arg2 arg3 arg4 (arg5)\n");
-	printf("arg1 	: 🚹number_of_philosophers\n");
+	printf("arg1 	: 🤔number_of_philosophers\n");
 	printf("arg2	: 💀time_to_die (ms)\n");
 	printf("arg3	: 🍝time_to_eat (ms)\n");
-	printf("arg4	: 💤time_to_sleep (ms)\n");
+	printf("arg4	: 😴time_to_sleep (ms)\n");
 	printf("(arg5)	: number_of_times_each_philosopher_must_eat\n\n");
 	printf("Example	: ./philo 5 800 200 200\n");
 	printf("Example	: ./philo 5 800 200 200 7\n");

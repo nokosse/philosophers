@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:53:23 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/26 18:17:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:59:47 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 //		They will execute the philo_routine function. (eat, sleep...)
 void	init_threads(t_arg *args)
 {
-	int			nbr_ph;
+	int			nbphilos;
 	pthread_t	*threads;
 	pthread_t	s_tid;
 
-	nbr_ph = args->total_philos;
-	threads = malloc(sizeof(pthread_t) * nbr_ph);
-	while (nbr_ph)
+	nbphilos = args->total_philos;
+	threads = malloc(sizeof(pthread_t) * nbphilos);
+	while (nbphilos > 0)
 	{
-		nbr_ph--;
-		pthread_create(&threads[nbr_ph], NULL, philo_routine,
-			(void *)&args->philos[nbr_ph]);
+		nbphilos--;
+		pthread_create(&threads[nbphilos], NULL, philo_routine,
+			(void *)&args->philos[nbphilos]);
 	}
-	pthread_create(&s_tid, NULL, monitoring, (void *)args->philos);
+	pthread_create(&s_tid, NULL, dead_checker, (void *)args->philos);
 	pthread_join(s_tid, NULL);
 	args->threads_id = threads;
 }
@@ -41,16 +41,16 @@ void	init_threads(t_arg *args)
 // avoid memory leaks.
 void	kill_threads(t_arg *args)
 {
-	int	nbr_ph;
+	int	nbphilos;
 
-	nbr_ph = args->total_philos;
-	if (nbr_ph == 1)
+	nbphilos = args->total_philos;
+	if (nbphilos == 1)
 	{
 		pthread_mutex_unlock(&args->forks[0]);
 	}
-	while (nbr_ph)
+	while (nbphilos)
 	{
-		nbr_ph--;
-		pthread_join(args->threads_id[nbr_ph], NULL);
+		nbphilos--;
+		pthread_join(args->threads_id[nbphilos], NULL);
 	}
 }
