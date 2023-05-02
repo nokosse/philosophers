@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:37:00 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/02 15:36:16 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:35:04 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,24 @@ typedef struct s_arg
 	t_philo			*philos;
 }					t_arg;
 
-// "notlibft" functions
-int		ft_atoi(const char *str);
-long	ft_atol(const char *str);
-int		ft_isdigit(int c);
-
 // Arguments parsing
 int		valid_args_check(int ac, char **av);
 int		check_int_max(char **av);
 void	invalid_args_msg(void);
 
-// Initialization of structures
+// Initialization (structures, mutexes, threads)
 void	init_philos(t_arg *args);
 int		init_args(t_arg *args, int argc, char **argv);
 void	free_args(t_arg *args);
+
 void	init_mutexes(t_arg *args);
 void	kill_mutexes(t_arg *args);
+
 void	init_threads(t_arg *args);
 void	kill_threads(t_arg *args);
 
 // Philosophers routine
 void	*dead_checker(void *args);
-int		ft_cnt_of_meals(t_philo *philo);
 void	*philo_routine(void *args);
 void	taking_forks(t_philo *philo);
 void	eating(t_philo *philo);
@@ -87,5 +83,8 @@ void	kill_philo(t_philo *philo, int i);
 // Utils
 long	ms_now(void);
 void	ft_usleep(int ms);
+int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
+int		ft_isdigit(int c);
 
 #endif
