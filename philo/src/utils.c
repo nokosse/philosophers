@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 13:54:08 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:40 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:34:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_usleep(int ms)
 }
 
 // ms_now is a very useful function in all the program.
-// This function will return the actual time in milliseconds.
+// This function will return the actual time in milliseconds. (since the Epoch)
+// Right now it is around 53 years and 4 months since the Epoch. (03/05/2023)
 //
 // We initialize a timeval structure. It's a structure that contains 2 members:
 // tv_sec and tv_usec.
@@ -57,10 +58,10 @@ void	ft_usleep(int ms)
 // Then it returns the result.
 long	ms_now(void)
 {
-	struct timeval	tv;
+	struct timeval	timeval;
 	long			res;
 
-	gettimeofday(&tv, NULL);
-	res = 1000 * (size_t)tv.tv_sec + (size_t)tv.tv_usec / 1000;
+	gettimeofday(&timeval, NULL);
+	res = 1000 * (size_t)timeval.tv_sec + (size_t)timeval.tv_usec / 1000;
 	return (res);
 }

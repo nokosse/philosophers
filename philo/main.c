@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/02 16:15:23 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:44:26 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ int	main(int ac, char **av)
 	init_philos(&args);
 	init_threads(&args);
 	kill_threads(&args);
+	printf("killed threads\n");
 	kill_mutexes(&args);
+	printf("killed mutexes\n");
 	free_args(&args);
-	return (1);
+	printf("freed args\n");
+	return (printf("END CLEAR\n"), 1);
 }
 
 // So, how do this program works to avoid the philosopher dying?

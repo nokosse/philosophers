@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:50:41 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/02 15:35:06 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:01:59 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	*dead_checker(void *args)
 			if (time_now - philo[i].last_meal > philo[i].limit_death)
 			{
 				kill_philo(philo, i);
+				pthread_mutex_unlock(&philo->lock_print);
 				return (NULL);
 			}
 		}
