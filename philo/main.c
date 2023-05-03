@@ -6,57 +6,62 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 14:44:26 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:49:23 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// The routine part of the philosophers will be executed in 'init_threads'.
-// REMINDER :
-// arg1: number of philosophers
-// arg2: time to die
-// arg3: time to eat
-// arg4: time to sleep
-// arg5: number of times each philosopher must eat
-int	main(int ac, char **av)
+int	ft_exit(char *str)
 {
-	t_arg	args;
-
-	if (!valid_args_check(ac, av) || !check_int_max(av))
-		return (invalid_args_msg(), 0);
-	init_args(&args, ac, av);
-	init_mutexes(&args);
-	init_philos(&args);
-	init_threads(&args);
-	kill_threads(&args);
-	printf("killed threads\n");
-	kill_mutexes(&args);
-	printf("killed mutexes\n");
-	free_args(&args);
-	printf("freed args\n");
-	return (printf("END CLEAR\n"), 1);
+	ft_putstr_fd("Error : ", 2);
+	ft_putstr_fd(str, 2);
+	return (0);
 }
 
-// So, how do this program works to avoid the philosopher dying?
-//
-// First, we need to understand the routine of the philosopher.
-// A philosopher must : eat, sleep, think, eat ...
-// 
-// ### HOW DO THEY EAT? ###
-// Each philosophers has only one fork, but he needs two to eat.
-// So when a philosopher wants to eat, he will have to borrow the fork
-// of his neighbor.
-// If all the philosophers takes their forks at the same time, there will
-// be a deadlock.
-// So what we do is : 'EVEN' philosophers will take their left fork first,
-// then borrow the right fork and eat.
-// Once they are done eating, they will put down their forks. (unlock)
-// And the 'ODD' philosophers will borrow the right fork first, then the
-// left fork and eat.
-//
-// So if you imagine a round table with philos around, 1 out of 2 will eat
-// simultaneously.
-//
-// And how does it works ?
-// I explain this in the file 'routine_forks.c'.
+int	check_death2(t_p *p)
+{
+	pthread_mutex_lock(&p->a.dead);
+	if (p->a.stop)
+	{
+		pthread_mutex_unlock(&p->a.dead);
+		return (1);
+	}
+	pthread_mutex_unlock(&p->a.dead);
+	return (0);
+}
+
+void	stop(t_p *p)
+{
+	int	i;
+
+	i = -1;
+	while (!check_death2(p))
+		ft_usleep(1);
+	while (++i < p->a.total)
+		pthread_join(p->ph[i].thread_id, NULL);
+	pthread_mutex_destroy(&p->a.write_mutex);
+	i = -1;
+	while (++i < p->a.total)
+		pthread_mutex_destroy(&p->ph[i].l_f);
+	if (p->a.stop == 2)
+		printf("Each philosopher ate %d time(s)\n", p->a.m_eat);
+	free(p->ph);
+}
+
+int	main(int argc, char **argv)
+{
+	t_p		p;
+
+	if (!(parse_args(argc, argv, &p)))
+		return (ft_exit("Invalid Arguments\n"));
+	p.ph = malloc(sizeof(t_philo) * p.a.total);
+	if (!p.ph)
+		return (ft_exit("Malloc returned NULL\n"));
+	if (!initialize(&p) || !threading(&p))
+	{
+		free(p.ph);
+		return (0);
+	}
+	stop(&p);
+}
