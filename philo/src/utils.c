@@ -6,22 +6,23 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:48:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 17:05:22 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:44:14 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+// This function will write "500 1 is eating\n" to stdout.
+// 500 is an example of the time in milliseconds since the start of the program.
+// 1 is the id of the philosopher.
 void	write_status(char *str, t_philo *ph)
 {
 	long int		time;
 
 	time = -1;
 	time = actual_time() - ph->pa->start_t;
-	if (time >= 0 && time <= 2147483647 && !check_death(ph, 0))
-	{
+	if (check_death(ph, 0) == 0)
 		printf("%ld %d %s", time, ph->id, str);
-	}
 }
 
 int	check_death(t_philo *ph, int i)

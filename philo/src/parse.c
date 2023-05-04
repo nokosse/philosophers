@@ -6,55 +6,72 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:42:16 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 17:53:06 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:00:24 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	ft_atoi(const char *str)
+// This function checks if the string is numeric only
+int	check_numeric(char *av)
 {
-	int		i;
-	long	sum;
+	int	i;
 
-	sum = 0;
-	i = -1;
-	while (str[++i])
-		sum = (sum * 10) + (str[i] - 48);
-	return (sum);
-}
-
-int	numeric(char **argv, int i, int j)
-{
-	while (argv[j])
+	i = 0;
+	while (av[i])
 	{
-		while (argv[j][i])
-		{
-			if (argv[j][i] < '0' || argv[j][i] > '9' || ft_strlen(argv[j]) > 10)
-				return (0);
-			i++;
-		}
-		i = 0;
-		j++;
+		if (!ft_isdigit(av[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }
 
-int	parse_args(int argc, char **argv, t_p *p)
+// This function checks if the string is positive (> 0)
+int	check_positive(char *av)
 {
-	if ((argc == 5 || argc == 6) && numeric(argv, 0, 1))
+	if (ft_atoi(av) <= 0)
+		return (0);
+	return (1);
+}
+
+// This function checks if the string is less than 11 digits
+int	check_ullong(char *av)
+{
+	if (ft_strlen(av) > 10)
+		return (0);
+	return (1);
+}
+
+// This function checks if the string doesn't exceed INT_MAX
+int	check_int_max(char *av)
+{
+	if (ft_atol(av) > INT_MAX)
+		return (0);
+	return (1);
+}
+
+// This function checks if the arguments are valid.
+int	parse_args(int ac, char **av)
+{
+	int	i;
+
+	i = 1;
+	if (ac < 5)
+		return (printf("Error : not enough arguments\n"), 0);
+	if (ac > 6)
+		return (printf("Error : too many arguments\n"), 0);
+	while (i < ac)
 	{
-		p->a.total = ft_atoi(argv[1]);
-		p->a.die = ft_atoi(argv[2]);
-		p->a.eat = ft_atoi(argv[3]);
-		p->a.sleep = ft_atoi(argv[4]);
-		p->a.m_eat = -1;
-		if (argc == 6)
-			p->a.m_eat = ft_atoi(argv[5]);
-		if (p->a.total <= 0 || p->a.die <= 0 || p->a.eat <= 0 \
-			|| p->a.sleep <= 0)
-			return (0);
-		return (1);
+		if (!check_numeric(av[i]))
+			return (printf("Error : argument %d is not numeric\n", i + 1), 0);
+		if (!check_int_max(av[i]))
+			return (printf("Error : argument %d is too big\n", i + 1), 0);
+		if (!check_ullong(av[i]))
+			return (printf("Error : argument %d is too big\n", i + 1), 0);
+		if (!check_positive(av[i]))
+			return (printf("Error : argument %d is not positive\n", i + 1), 0);
+		i++;
 	}
-	return (0);
+	return (1);
 }

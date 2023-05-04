@@ -6,11 +6,26 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:46:04 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 16:46:42 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:36:26 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+int	init_args(int argc, char **argv, t_p *p)
+{
+	p->a.total = ft_atoi(argv[1]);
+	p->a.die = ft_atoi(argv[2]);
+	p->a.eat = ft_atoi(argv[3]);
+	p->a.sleep = ft_atoi(argv[4]);
+	p->a.m_eat = -1;
+	if (argc == 6)
+		p->a.m_eat = ft_atoi(argv[5]);
+	if (p->a.total <= 0 || p->a.die <= 0 || p->a.eat <= 0 \
+		|| p->a.sleep <= 0)
+		return (0);
+	return (1);
+}
 
 void	init_mutex(t_p *p)
 {

@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 17:53:05 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:53:23 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_death2(t_p *p)
 	return (0);
 }
 
-void	stop(t_p *p)
+void	free_struct(t_p *p)
 {
 	int	i;
 
@@ -44,8 +44,6 @@ void	stop(t_p *p)
 	i = -1;
 	while (++i < p->a.total)
 		pthread_mutex_destroy(&p->ph[i].l_f);
-	if (p->a.stop == 2)
-		printf("Each philosopher ate %d time(s)\n", p->a.m_eat);
 	free(p->ph);
 }
 
@@ -53,15 +51,17 @@ int	main(int argc, char **argv)
 {
 	t_p		p;
 
-	if (!(parse_args(argc, argv, &p)))
-		return (ft_exit("Invalid Arguments\n"));
+	if (!parse_args(argc, argv))
+		return (0);
+	init_args(argc, argv, &p);
 	p.ph = malloc(sizeof(t_philo) * p.a.total);
 	if (!p.ph)
-		return (ft_exit("Malloc returned NULL\n"));
+		return (0);
 	if (!initialize(&p) || !threading(&p))
 	{
 		free(p.ph);
 		return (0);
 	}
-	stop(&p);
+	free_struct(&p);
+	return (1);
 }

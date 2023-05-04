@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 17:53:14 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:41:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <limits.h>
 
 /*
 ** structures
@@ -65,8 +66,11 @@ typedef struct s_p
 /*
 ** functions
 */
-
-int				parse_args(int argc, char **argv, t_p *p);
+int				ft_atoi(const char *str);
+long			ft_atol(const char *str);
+int				ft_isdigit(int c);
+int				parse_args(int ac, char **av);
+int				init_args(int argc, char **argv, t_p *p);
 int				initialize(t_p *p);
 int				ft_exit(char *str);
 void			write_status(char *str, t_philo *ph);
