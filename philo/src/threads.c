@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:35 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:02:50 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:33:28 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*thread(void *data)
 		pthread_create(&ph->thread_death_id, NULL, is_dead, data);
 		activity(ph);
 		pthread_detach(ph->thread_death_id);
-		if ((int)++ph->nb_eat == ph->pa->m_eat)
+		if ((int)++ph->nb_eat == ph->pa->must_eat)
 		{
 			pthread_mutex_lock(&ph->pa->finish);
 			ph->finish = 1;

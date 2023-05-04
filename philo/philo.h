@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:06:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:32:44 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_arg
 	int						die;
 	int						eat;
 	int						sleep;
-	int						m_eat;
+	int						must_eat;
 	long int				start_t;
 	pthread_mutex_t			lock_print;
 	pthread_mutex_t			dead;
