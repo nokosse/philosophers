@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 15:53:23 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:21:47 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ int	main(int argc, char **argv)
 	p.ph = malloc(sizeof(t_philo) * p.a.total);
 	if (!p.ph)
 		return (0);
-	if (!initialize(&p) || !threading(&p))
-	{
-		free(p.ph);
-		return (0);
-	}
+	if (!init_mutex(&p) || !threading(&p))
+		return (free(p.ph), 0);
 	free_struct(&p);
 	return (1);
 }

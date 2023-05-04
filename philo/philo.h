@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 15:41:06 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:07:42 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,17 @@ int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 int				ft_isdigit(int c);
 int				parse_args(int ac, char **av);
-int				init_args(int argc, char **argv, t_p *p);
-int				initialize(t_p *p);
+
+void			init_args(int argc, char **argv, t_p *p);
+int				init_mutex(t_p *p);
 int				ft_exit(char *str);
 void			write_status(char *str, t_philo *ph);
 long int		actual_time(void);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_usleep(long int time_in_ms);
+
 int				threading(t_p *p);
+
 void			activity(t_philo *ph);
 int				check_death(t_philo *ph, int i);
 int				ft_strlen(char *str);
