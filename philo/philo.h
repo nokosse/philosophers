@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:40:17 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:06:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_arg
 	int						sleep;
 	int						m_eat;
 	long int				start_t;
-	pthread_mutex_t			write_mutex;
+	pthread_mutex_t			lock_print;
 	pthread_mutex_t			dead;
 	pthread_mutex_t			time_eat;
 	pthread_mutex_t			finish;
@@ -63,14 +63,13 @@ typedef struct s_p
 	t_arg					a;
 }							t_p;
 
-/*
-** functions
-*/
+// Parsing
 int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 int				ft_isdigit(int c);
 int				parse_args(int ac, char **av);
 
+// Init
 void			init_args(int argc, char **argv, t_p *p);
 int				init_mutex(t_p *p);
 void			write_status(char *str, t_philo *ph);

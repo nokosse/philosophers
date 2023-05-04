@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:46:04 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:07:08 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:02:50 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_args(int argc, char **argv, t_p *p)
 
 void	init_mutex2(t_p *p)
 {
-	pthread_mutex_init(&p->a.write_mutex, NULL);
+	pthread_mutex_init(&p->a.lock_print, NULL);
 	pthread_mutex_init(&p->a.dead, NULL);
 	pthread_mutex_init(&p->a.time_eat, NULL);
 	pthread_mutex_init(&p->a.finish, NULL);

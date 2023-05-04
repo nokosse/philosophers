@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:40:14 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:02:50 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_struct(t_p *p)
 		ft_usleep(1);
 	while (++i < p->a.total)
 		pthread_join(p->ph[i].thread_id, NULL);
-	pthread_mutex_destroy(&p->a.write_mutex);
+	pthread_mutex_destroy(&p->a.lock_print);
 	i = -1;
 	while (++i < p->a.total)
 		pthread_mutex_destroy(&p->ph[i].l_f);
