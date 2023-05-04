@@ -6,18 +6,11 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:21:47 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:40:14 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_exit(char *str)
-{
-	ft_putstr_fd("Error : ", 2);
-	ft_putstr_fd(str, 2);
-	return (0);
-}
 
 int	check_death2(t_p *p)
 {

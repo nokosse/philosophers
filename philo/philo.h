@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:07:42 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:40:17 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int				parse_args(int ac, char **av);
 
 void			init_args(int argc, char **argv, t_p *p);
 int				init_mutex(t_p *p);
-int				ft_exit(char *str);
 void			write_status(char *str, t_philo *ph);
 long int		actual_time(void);
 void			ft_putstr_fd(char *s, int fd);

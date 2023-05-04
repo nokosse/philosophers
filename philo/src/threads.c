@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:35 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/03 16:47:42 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:39:41 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	threading(t_p *p)
 	{
 		p->ph[i].pa = &p->a;
 		if (pthread_create(&p->ph[i].thread_id, NULL, thread, &p->ph[i]) != 0)
-			return (ft_exit("Pthread did not return 0\n"));
+			return (0);
 		i++;
 	}
 	return (1);

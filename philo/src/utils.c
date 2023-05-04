@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:48:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 14:44:14 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:40:05 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ long int	actual_time(void)
 
 	time = 0;
 	if (gettimeofday(&current_time, NULL) == -1)
-		ft_exit("Gettimeofday returned -1\n");
+		return (0);
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
 }

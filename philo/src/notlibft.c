@@ -6,23 +6,11 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:51 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 16:21:18 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:40:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (fd >= 0)
-	{
-		while (s && *s)
-		{
-			write(fd, &*s, 1);
-			s++;
-		}
-	}
-}
 
 int	ft_strlen(char *str)
 {
