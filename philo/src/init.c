@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:46:04 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:32:44 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:45:54 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	init_mutex(t_p *p)
 	i = 0;
 	p->a.start_t = actual_time();
 	p->a.stop = 0;
-	p->a.nb_p_finish = 0;
+	p->a.finished_philos = 0;
 	init_mutex2(p);
 	while (i < p->a.total)
 	{

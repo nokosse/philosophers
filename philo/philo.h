@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:40:06 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:45:49 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_arg
 	pthread_mutex_t			dead;
 	pthread_mutex_t			time_eat;
 	pthread_mutex_t			finish;
-	int						nb_p_finish;
+	int						finished_philos;
 	int						stop;
 }							t_arg;
 

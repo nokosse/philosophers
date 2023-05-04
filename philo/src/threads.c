@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:35 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:40:18 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:45:49 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	*thread(void *data)
 		{
 			pthread_mutex_lock(&ph->pa->finish);
 			ph->finish = 1;
-			ph->pa->nb_p_finish++;
-			if (ph->pa->nb_p_finish == ph->pa->total)
+			ph->pa->finished_philos++;
+			if (ph->pa->finished_philos == ph->pa->total)
 			{
 				pthread_mutex_unlock(&ph->pa->finish);
 				check_death(ph, 2);
