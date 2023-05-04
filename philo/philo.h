@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:32:44 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:40:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			ft_usleep(long int time_in_ms);
 
 int				threading(t_p *p);
 
-void			activity(t_philo *ph);
+void			routine(t_philo *ph);
 int				check_death(t_philo *ph, int i);
 int				ft_strlen(char *str);
 

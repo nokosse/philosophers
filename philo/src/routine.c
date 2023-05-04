@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:17 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:02:50 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:40:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	thinking(t_philo *ph)
 	pthread_mutex_unlock(&ph->pa->lock_print);
 }
 
-void	activity(t_philo *ph)
+void	routine(t_philo *ph)
 {
 	taking_forks(ph);
 	eating(ph);
