@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 17:28:02 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/09 15:18:17 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/09 17:11:41 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,21 @@ void	free_all(t_p *p)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (check_death2(p) == 0)
 		ft_usleep(1);
-	while (++i < p->a.total)
+	while (i < p->a.total)
+	{
 		pthread_join(p->ph[i].thread_id, NULL);
+		i++;
+	}
 	pthread_mutex_destroy(&p->a.lock_print);
-	i = -1;
-	while (++i < p->a.total)
+	i = 0;
+	while (i < p->a.total)
+	{
 		pthread_mutex_destroy(&p->ph[i].left_fork);
+		i++;
+	}
 	free(p->ph);
 }
 
