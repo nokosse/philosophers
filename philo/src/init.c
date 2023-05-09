@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:46:04 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:45:54 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:04:01 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	init_mutex(t_p *p)
 		p->ph[i].ms_eat = p->a.start_t;
 		p->ph[i].nb_eat = 0;
 		p->ph[i].finish = 0;
-		p->ph[i].r_f = NULL;
-		pthread_mutex_init(&p->ph[i].l_f, NULL);
+		p->ph[i].right_fork = NULL;
+		pthread_mutex_init(&p->ph[i].left_fork, NULL);
 		if (p->a.total == 1)
 			return (1);
 		if (i == p->a.total - 1)
-			p->ph[i].r_f = &p->ph[0].l_f;
+			p->ph[i].right_fork = &p->ph[0].left_fork;
 		else
-			p->ph[i].r_f = &p->ph[i + 1].l_f;
+			p->ph[i].right_fork = &p->ph[i + 1].left_fork;
 		i++;
 	}
 	return (1);

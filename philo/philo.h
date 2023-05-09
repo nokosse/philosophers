@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:53:13 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:45:49 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:04:01 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_philo
 	int						id;
 	pthread_t				thread_id;
 	pthread_t				thread_death_id;
-	pthread_mutex_t			*r_f;
-	pthread_mutex_t			l_f;
+	pthread_mutex_t			*right_fork;
+	pthread_mutex_t			left_fork;
 	t_arg					*pa;
 	long int				ms_eat;
 	unsigned int			nb_eat;
@@ -74,7 +74,7 @@ void			init_args(int argc, char **argv, t_p *p);
 int				init_mutex(t_p *p);
 void			write_status(char *str, t_philo *ph);
 long int		actual_time(void);
-void			ft_putstr_fd(char *s, int fd);
+void			ft_putstright_forkd(char *s, int fd);
 void			ft_usleep(long int time_in_ms);
 
 int				threading(t_p *p);

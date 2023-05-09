@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:47:17 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/04 17:40:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:04:01 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	eating(t_philo *ph)
 	pthread_mutex_unlock(&ph->pa->time_eat);
 	pthread_mutex_unlock(&ph->pa->lock_print);
 	ft_usleep(ph->pa->eat);
-	pthread_mutex_unlock(ph->r_f);
-	pthread_mutex_unlock(&ph->l_f);
+	pthread_mutex_unlock(ph->right_fork);
+	pthread_mutex_unlock(&ph->left_fork);
 }
 
 void	taking_forks(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->l_f);
+	pthread_mutex_lock(&ph->left_fork);
 	pthread_mutex_lock(&ph->pa->lock_print);
 	write_status("has taken a fork\n", ph);
 	pthread_mutex_unlock(&ph->pa->lock_print);
-	if (!ph->r_f)
+	if (!ph->right_fork)
 	{
 		ft_usleep(ph->pa->die * 2);
 		return ;
 	}
-	pthread_mutex_lock(ph->r_f);
+	pthread_mutex_lock(ph->right_fork);
 	pthread_mutex_lock(&ph->pa->lock_print);
 	write_status("has taken a fork\n", ph);
 	pthread_mutex_unlock(&ph->pa->lock_print);
