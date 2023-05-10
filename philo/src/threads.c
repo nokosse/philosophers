@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 16:47:35 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/09 17:06:32 by kvisouth         ###   ########.fr       */
+/*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
+/*   Updated: 2023/05/10 18:51:47 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	*is_dead(void	*data)
 	{
 		pthread_mutex_unlock(&ph->pa->time_eat);
 		pthread_mutex_unlock(&ph->pa->finish);
-		pthread_mutex_lock(&ph->pa->lock_print);
-		write_status("died 💀💀👎😹👎😂\n", ph);
-		pthread_mutex_unlock(&ph->pa->lock_print);
+		pthread_mutex_lock(&ph->pa->mutex_print);
+		write_status("died\n", ph);
+		pthread_mutex_unlock(&ph->pa->mutex_print);
 		check_death(ph, 1);
 	}
 	pthread_mutex_unlock(&ph->pa->time_eat);
@@ -45,14 +45,14 @@ void	*thread(void *data)
 	while (!check_death(ph, 0))
 	{
 		pthread_create(&ph->thread_death_id, NULL, is_dead, data);
-		routine(ph);
+		activity(ph);
 		pthread_detach(ph->thread_death_id);
-		if ((int)++ph->nb_eat == ph->pa->must_eat)
+		if ((int)++ph->nb_eat == ph->pa->meals_to_eat)
 		{
 			pthread_mutex_lock(&ph->pa->finish);
 			ph->finish = 1;
-			ph->pa->finished_philos++;
-			if (ph->pa->finished_philos == ph->pa->total)
+			ph->pa->satiated_philos++;
+			if (ph->pa->satiated_philos == ph->pa->total)
 			{
 				pthread_mutex_unlock(&ph->pa->finish);
 				check_death(ph, 2);

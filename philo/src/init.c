@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 16:46:04 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/09 15:04:01 by kvisouth         ###   ########.fr       */
+/*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
+/*   Updated: 2023/05/10 18:51:27 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@ void	init_args(int argc, char **argv, t_p *p)
 	p->a.die = ft_atoi(argv[2]);
 	p->a.eat = ft_atoi(argv[3]);
 	p->a.sleep = ft_atoi(argv[4]);
-	p->a.must_eat = -1;
+	p->a.meals_to_eat = -1;
 	if (argc == 6)
-		p->a.must_eat = ft_atoi(argv[5]);
+		p->a.meals_to_eat = ft_atoi(argv[5]);
 }
 
-void	init_mutex2(t_p *p)
+void	init_mutex(t_p *p)
 {
-	pthread_mutex_init(&p->a.lock_print, NULL);
+	pthread_mutex_init(&p->a.mutex_print, NULL);
 	pthread_mutex_init(&p->a.dead, NULL);
 	pthread_mutex_init(&p->a.time_eat, NULL);
 	pthread_mutex_init(&p->a.finish, NULL);
 }
 
-int	init_mutex(t_p *p)
+int	initialize(t_p *p)
 {
 	int	i;
 
 	i = 0;
 	p->a.start_t = actual_time();
 	p->a.stop = 0;
-	p->a.finished_philos = 0;
-	init_mutex2(p);
+	p->a.satiated_philos = 0;
+	init_mutex(p);
 	while (i < p->a.total)
 	{
 		p->ph[i].id = i + 1;
