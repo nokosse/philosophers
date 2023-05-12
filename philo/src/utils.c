@@ -6,23 +6,20 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 13:15:24 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:27:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	check_death(t_philo *ph, int i)
+int	check_death(t_philo *philo, int i)
 {
-	pthread_mutex_lock(&ph->sarg->dead);
-	if (i)
-		ph->sarg->stop = i;
-	if (ph->sarg->stop)
-	{
-		pthread_mutex_unlock(&ph->sarg->dead);
-		return (1);
-	}
-	pthread_mutex_unlock(&ph->sarg->dead);
+	pthread_mutex_lock(&philo->sarg->dead);
+	if (i != 0)
+		philo->sarg->flag = i;
+	if (philo->sarg->flag)
+		return (pthread_mutex_unlock(&philo->sarg->dead), 1);
+	pthread_mutex_unlock(&philo->sarg->dead);
 	return (0);
 }
 
@@ -38,12 +35,11 @@ long int	actual_time(void)
 	return (time);
 }
 
-void	ft_usleep(long int time_in_ms)
+void	print_status(char *str, t_philo *philo)
 {
-	long int	start_time;
+	long int		time;
 
-	start_time = 0;
-	start_time = actual_time();
-	while ((actual_time() - start_time) < time_in_ms)
-		usleep(time_in_ms / 10);
+	time = actual_time() - philo->sarg->time_start;
+	if (!check_death(philo, 0))
+		printf("%ld %d %s", time, philo->id, str);
 }

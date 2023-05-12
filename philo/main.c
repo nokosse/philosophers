@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 15:04:12 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:55:01 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 int	main(int ac, char **av)
 {
-	t_struct		p;
+	t_struct		st;
 
 	if (parse_args(ac, av) == 0)
 		return (0);
-	init_args(ac, av, &p);
-	p.ph = malloc(sizeof(t_philo) * p.arg.total);
-	if (!p.ph)
+	init_arg(ac, av, &st);
+	st.philo = malloc(sizeof(t_philo) * st.arg.nb_philo);
+	if (!st.philo)
 		return (0);
-	if (!initialize(&p))
-		return (free(p.ph), 0);
-	if (!threading(&p))
-		return (free(p.ph), 0);
-	return (free_all(&p), 0);
+	init_philo(&st);
+	if (!threading(&st))
+		return (free(st.philo), 0);
+	return (free_all(&st), 0);
 }
 
 // valgrind --leak-check=full

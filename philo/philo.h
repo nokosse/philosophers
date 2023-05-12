@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 14:51:47 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:27:22 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 // It will store most of the arguments we send.
 typedef struct s_arg
 {
-	int						total;
-	int						die;
-	int						eat;
-	int						sleep;
+	int						nb_philo;
+	int						time2die;
+	int						time2eat;
+	int						time2sleep;
 	int						meals_to_eat;
 	int						satiated_philos;
-	int						stop;
-	long int				start_t;
+	int						flag;
+	long int				time_start;
 	pthread_mutex_t			mutex_print;
 	pthread_mutex_t			dead;
 	pthread_mutex_t			time_eat;
@@ -67,7 +67,7 @@ typedef struct s_philo
 // It will store both structures above to have an easy access to them.
 typedef struct s_struct
 {
-	t_philo					*ph;
+	t_philo					*philo;
 	t_arg					arg;
 }							t_struct;
 
@@ -75,15 +75,19 @@ typedef struct s_struct
 int				parse_args(int ac, char **av);
 
 // Initialization
-int				initialize(t_struct *p);
-void			init_args(int argc, char **argv, t_struct *p);
-void			free_all(t_struct *p);
+int				init_philo(t_struct *st);
+void			init_arg(int argc, char **argv, t_struct *st);
+void			free_all(t_struct *st);
 
 // Functions
-int				threading(t_struct *p);
-int				check_death(t_philo *ph, int i);
-void			activity(t_philo *ph);
-void			print_status(char *str, t_philo *ph);
+int				threading(t_struct *st);
+int				check_death(t_philo *philo, int i);
+void			routine(t_philo *philo);
+void			dying(t_philo *philo);
+void			thinking(t_philo *philo);
+void			sleeping(t_philo *philo);
+void			eating(t_philo *philo);
+void			print_status(char *str, t_philo *philo);
 
 // Lib & Utils
 int				ft_strlen(char *str);

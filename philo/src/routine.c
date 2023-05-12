@@ -6,65 +6,66 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 13:15:24 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:59:13 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	print_status(char *str, t_philo *ph)
+void	dying(t_philo *philo)
 {
-	long int		time;
-
-	time = actual_time() - ph->sarg->start_t;
-	if (!check_death(ph, 0))
-		printf("%ld %d %s", time, ph->id, str);
+	pthread_mutex_unlock(&philo->sarg->time_eat);
+	pthread_mutex_unlock(&philo->sarg->finish);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("died 💀💀 👎😹👎 😂🤣\n", philo);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
+	check_death(philo, 1);
 }
 
-void	thinking(t_philo *ph)
+void	thinking(t_philo *philo)
 {
-	pthread_mutex_lock(&ph->sarg->mutex_print);
-	print_status("is thinking\n", ph);
-	pthread_mutex_unlock(&ph->sarg->mutex_print);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("is thinking\n", philo);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
 }
 
-void	sleeping(t_philo *ph)
+void	sleeping(t_philo *philo)
 {
-	pthread_mutex_lock(&ph->sarg->mutex_print);
-	print_status("is sleeping\n", ph);
-	pthread_mutex_unlock(&ph->sarg->mutex_print);
-	ft_usleep(ph->sarg->sleep);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("is sleeping\n", philo);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
+	ft_usleep(philo->sarg->time2sleep);
 }
 
-void	eating(t_philo *ph)
+void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&ph->left_fork);
-	pthread_mutex_lock(&ph->sarg->mutex_print);
-	print_status("has taken arg fork\n", ph);
-	pthread_mutex_unlock(&ph->sarg->mutex_print);
-	if (!ph->right_fork)
+	pthread_mutex_lock(&philo->left_fork);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("has taken arg fork\n", philo);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
+	if (!philo->right_fork)
 	{
-		ft_usleep(ph->sarg->die * 2);
+		ft_usleep(philo->sarg->time2die * 2);
 		return ;
 	}
-	pthread_mutex_lock(ph->right_fork);
-	pthread_mutex_lock(&ph->sarg->mutex_print);
-	print_status("has taken arg fork\n", ph);
-	pthread_mutex_unlock(&ph->sarg->mutex_print);
-	pthread_mutex_lock(&ph->sarg->mutex_print);
-	print_status("is eating\n", ph);
-	pthread_mutex_lock(&ph->sarg->time_eat);
-	ph->last_eat = actual_time();
-	pthread_mutex_unlock(&ph->sarg->time_eat);
-	pthread_mutex_unlock(&ph->sarg->mutex_print);
-	ft_usleep(ph->sarg->eat);
-	pthread_mutex_unlock(ph->right_fork);
-	pthread_mutex_unlock(&ph->left_fork);
+	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("has taken arg fork\n", philo);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
+	pthread_mutex_lock(&philo->sarg->mutex_print);
+	print_status("is eating\n", philo);
+	pthread_mutex_lock(&philo->sarg->time_eat);
+	philo->last_eat = actual_time();
+	pthread_mutex_unlock(&philo->sarg->time_eat);
+	pthread_mutex_unlock(&philo->sarg->mutex_print);
+	ft_usleep(philo->sarg->time2eat);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(&philo->left_fork);
 }
 
-void	activity(t_philo *ph)
+void	routine(t_philo *philo)
 {
-	eating(ph);
-	sleeping(ph);
-	thinking(ph);
+	eating(philo);
+	sleeping(philo);
+	thinking(philo);
 }
