@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 16:27:22 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:10:05 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 
 // Structure for arguments (t_arg)
 // It will store most of the arguments we send.
+// The 4 mutexes here are used to protect variables or functions.
+// mtx_print: It's used to protect the print function.
+//		So it can't be called by multiple threads at the same time.
+// mutex_dead: It's used to protect the 'flag' variable.
+//		So it can't be changed (utils.c) by multiple threads at the same time.
+// mutex_time_eat: It's used to protect the 'last_eat' variable.
+// mutex_finish: It's used to protect the multiple functions and variables.
 typedef struct s_arg
 {
 	int						nb_philo;
@@ -36,10 +43,10 @@ typedef struct s_arg
 	int						satiated_philos;
 	int						flag;
 	long int				time_start;
-	pthread_mutex_t			mutex_print;
-	pthread_mutex_t			dead;
-	pthread_mutex_t			time_eat;
-	pthread_mutex_t			finish;
+	pthread_mutex_t			mtx_print;
+	pthread_mutex_t			mtx_dead;
+	pthread_mutex_t			mtx_time_eat;
+	pthread_mutex_t			mtx_finish;
 }							t_arg;
 
 // Structure for philosophers (t_philo)
@@ -55,7 +62,7 @@ typedef struct s_philo
 	int						id;
 	int						finish;
 	long int				last_eat;
-	unsigned int			nb_eat;
+	unsigned int			meals_eaten;
 	pthread_t				thread_id;
 	pthread_t				thread_death_id;
 	pthread_mutex_t			*right_fork;

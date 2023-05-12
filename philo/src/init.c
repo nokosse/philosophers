@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 16:27:52 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:10:05 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	init_arg(int argc, char **argv, t_struct *st)
 
 void	init_mutex(t_struct *st)
 {
-	pthread_mutex_init(&st->arg.mutex_print, NULL);
-	pthread_mutex_init(&st->arg.dead, NULL);
-	pthread_mutex_init(&st->arg.time_eat, NULL);
-	pthread_mutex_init(&st->arg.finish, NULL);
+	pthread_mutex_init(&st->arg.mtx_print, NULL);
+	pthread_mutex_init(&st->arg.mtx_dead, NULL);
+	pthread_mutex_init(&st->arg.mtx_time_eat, NULL);
+	pthread_mutex_init(&st->arg.mtx_finish, NULL);
 }
 
 int	init_philo(t_struct *st)
@@ -44,7 +44,7 @@ int	init_philo(t_struct *st)
 	{
 		st->philo[i].id = i + 1;
 		st->philo[i].last_eat = st->arg.time_start;
-		st->philo[i].nb_eat = 0;
+		st->philo[i].meals_eaten = 0;
 		st->philo[i].finish = 0;
 		st->philo[i].right_fork = NULL;
 		pthread_mutex_init(&st->philo[i].left_fork, NULL);
@@ -71,7 +71,7 @@ void	free_all(t_struct *st)
 		pthread_join(st->philo[i].thread_id, NULL);
 		i++;
 	}
-	pthread_mutex_destroy(&st->arg.mutex_print);
+	pthread_mutex_destroy(&st->arg.mtx_print);
 	i = 0;
 	while (i < st->arg.nb_philo)
 	{
