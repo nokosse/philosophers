@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/10 18:51:50 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:15:24 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	check_death(t_philo *ph, int i)
 {
-	pthread_mutex_lock(&ph->pa->dead);
+	pthread_mutex_lock(&ph->sarg->dead);
 	if (i)
-		ph->pa->stop = i;
-	if (ph->pa->stop)
+		ph->sarg->stop = i;
+	if (ph->sarg->stop)
 	{
-		pthread_mutex_unlock(&ph->pa->dead);
+		pthread_mutex_unlock(&ph->sarg->dead);
 		return (1);
 	}
-	pthread_mutex_unlock(&ph->pa->dead);
+	pthread_mutex_unlock(&ph->sarg->dead);
 	return (0);
 }
 
