@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:10:05 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:47:38 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_philo
 {
 	int						id;
 	int						finish;
+	int						meals_eaten;
 	long int				last_eat;
-	unsigned int			meals_eaten;
 	pthread_t				thread_id;
 	pthread_t				thread_death_id;
 	pthread_mutex_t			*right_fork;

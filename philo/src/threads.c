@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:40:10 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:49:59 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ void	*monitoring(void	*data)
 	return (0);
 }
 
-// This function 
+// This thread is ran by each philo. 9 philos = this function running 9 times.
+// Every odd philo will wait for 10% of the time to eat before starting to eat.
+// So every odds philos will have 2 forks, then same for the even philos.
+//
+// Then, for each philos, we create a thread that will monitor if the philo is
+// dead. This thread is created in the 'monitoring' function.
 void	*thread(void *data)
 {
 	t_philo					*philo;
@@ -51,7 +56,7 @@ void	*thread(void *data)
 		pthread_create(&philo->thread_death_id, NULL, monitoring, data);
 		routine(philo);
 		pthread_detach(philo->thread_death_id);
-		if ((int)++philo->meals_eaten == philo->sarg->meals_to_eat)
+		if (++philo->meals_eaten == philo->sarg->meals_to_eat)
 		{
 			pthread_mutex_lock(&philo->sarg->mtx_finish);
 			philo->finish = 1;
