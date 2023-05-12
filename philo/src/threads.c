@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/10 18:51:47 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:08:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*is_dead(void	*data)
 		pthread_mutex_unlock(&ph->pa->time_eat);
 		pthread_mutex_unlock(&ph->pa->finish);
 		pthread_mutex_lock(&ph->pa->mutex_print);
-		write_status("died\n", ph);
+		print_status("died\n", ph);
 		pthread_mutex_unlock(&ph->pa->mutex_print);
 		check_death(ph, 1);
 	}

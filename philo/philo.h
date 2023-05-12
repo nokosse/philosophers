@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/10 18:51:58 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:08:06 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_p
 int				parse_args(int ac, char **av);
 void			init_args(int argc, char **argv, t_p *p);
 int				initialize(t_p *p);
-void			write_status(char *str, t_philo *ph);
+void			print_status(char *str, t_philo *ph);
 long int		actual_time(void);
 void			ft_usleep(long int time_in_ms);
 int				threading(t_p *p);
