@@ -6,12 +6,15 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:21:54 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:32:43 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+// This function initialize the arguments structure. (t_arg)
+// our argvs are in string format, so we need to convert them to int.
+// This is the function that put the arguments into the structure.
 void	init_arg(int argc, char **argv, t_struct *st)
 {
 	st->arg.nb_philo = ft_atoi(argv[1]);
@@ -23,6 +26,15 @@ void	init_arg(int argc, char **argv, t_struct *st)
 		st->arg.meals_to_eat = ft_atoi(argv[5]);
 }
 
+// This function initialize the mutexes.
+// We have 4 mutexes:
+// 1. mtx_print: to print the messages.
+// 2. mtx_dead: to check if someone is dead.
+// 3. mtx_time_eat: to check if someone is eating.
+// 4. mtx_finish: to check if someone is finished.
+// We need these mutexes because we want to protect the variables to be
+// accessed by multiple threads at the same time which can cause :
+// Data races, data inconsistency, memory corruption, etc..
 void	init_mutex(t_struct *st)
 {
 	pthread_mutex_init(&st->arg.mtx_print, NULL);
@@ -31,6 +43,12 @@ void	init_mutex(t_struct *st)
 	pthread_mutex_init(&st->arg.mtx_finish, NULL);
 }
 
+// This function initialize all the datas we need for philosophers like :
+// 1. id: the id of each philosopher (starting from 1).
+// 2. last_eat: the last time the philosopher ate.
+// 3. meals_eaten: the number of meals the philosopher ate.
+// 4. finish: to check if the philosopher is finished. (it's a flag)
+// etc..
 int	init_philo(t_struct *st)
 {
 	int	i;

@@ -6,11 +6,15 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 11:32:29 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:27:13 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+// All these functions are pretty much the same.
+// It unlock mutexes, print status and change some functions in struct
+// then locks the mutex back again.
 
 void	dying(t_philo *philo)
 {
@@ -63,6 +67,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->left_fork);
 }
 
+// Note that dying is not there because it's a special case.
 void	routine(t_philo *philo)
 {
 	eating(philo);
