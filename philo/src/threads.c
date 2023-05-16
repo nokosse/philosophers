@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:58:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void	*monitoring(void	*data)
 	return (0);
 }
 
-// This thread is ran by each philo. 9 philos = this function running 9 times.
-// Every odd philo will wait for 10% of the time to eat before starting to eat.
-// So every odds philos will have 2 forks, then same for the even philos.
+// This is the thread that runs for each philos.
+// It check if the philo ID is even.
+// If it's even, it will usleep the philo to make the even philo
+// start eating later than the odd philo.
 //
-// Then, for each philos, we create a thread that will monitor if the philo is
-// dead. This thread is created in the 'monitoring' function.
+// Then, the while loop will run the messages and will check if
+// the philo has done eaten enough, or if the philo is dead.
+// It will stop the loop if this is the case thanks to the
+// check_death function and the finish flag.
 void	*thread(void *data)
 {
 	t_philo					*philo;
