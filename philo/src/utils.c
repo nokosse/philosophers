@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:38:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 // In this function we have a mutex : 'dead'
 // It protects the 'flag' variable from being changed by multiple
 // threads at the same time.
+// If we send i = 2, it means the flag will be set to 2.
+// 2 is when all the philos have eaten enough meals.
+// If we send i = 1, it means the flag will be set to 1.
+// 1 is when a philo is dead.
 int	check_death(t_philo *philo, int i)
 {
 	pthread_mutex_lock(&philo->sarg->mtx_dead);
