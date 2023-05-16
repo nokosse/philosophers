@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:15:24 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:34:54 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	main(int ac, char **av)
 	return (free_all(&st), 0);
 }
 
+// Valgrind tests might skew the results because it is running the simulation
+// much much slower than usual, making philos dying sometimes.
+// Use valgrind only to check leaks and not to compare the results !
 // valgrind --leak-check=full
 // valgrind --leak-check=full --show-leak-kinds=all
 
