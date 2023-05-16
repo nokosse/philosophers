@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:05:20 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:32:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->left_fork);
 	pthread_mutex_lock(&philo->sarg->mtx_print);
-	print_status("has taken arg fork\n", philo);
+	print_status("has taken a fork\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	if (!philo->right_fork)
 	{
@@ -50,7 +50,7 @@ void	eating(t_philo *philo)
 	}
 	pthread_mutex_lock(philo->right_fork);
 	pthread_mutex_lock(&philo->sarg->mtx_print);
-	print_status("has taken arg fork\n", philo);
+	print_status("has taken a fork\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	pthread_mutex_lock(&philo->sarg->mtx_print);
 	print_status("is eating\n", philo);
