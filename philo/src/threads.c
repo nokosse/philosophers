@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:25:34 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*monitoring(void	*data)
 		pthread_mutex_lock(&philo->sarg->mtx_time_eat);
 		pthread_mutex_lock(&philo->sarg->mtx_finish);
 		if (!check_death(philo, 0) && !philo->finish
-			&& ((actual_time() - philo->last_eat)
+			&& ((time_now() - philo->last_eat)
 				>= (long)(philo->sarg->time2die)))
 			dying(philo);
 		pthread_mutex_unlock(&philo->sarg->mtx_time_eat);

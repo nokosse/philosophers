@@ -6,11 +6,14 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:34:54 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:55:44 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// We malloc only philo because it's for the threads.
+// Mutexes don't need to be malloced.
 
 int	main(int ac, char **av)
 {

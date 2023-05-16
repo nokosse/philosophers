@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:17:33 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_death(t_philo *philo, int i)
 // We divide the number of microseconds by 1000 to convert it to milliseconds.
 // We add the two numbers to get the current time in milliseconds.
 // And then we have our current time in milliseconds.
-long int	actual_time(void)
+long int	time_now(void)
 {
 	long int			time;
 	struct timeval		current_time;
@@ -53,7 +53,7 @@ void	print_status(char *str, t_philo *philo)
 {
 	long int		time;
 
-	time = actual_time() - philo->sarg->time_start;
+	time = time_now() - philo->sarg->time_start;
 	if (!check_death(philo, 0))
 		printf("%ld %d %s", time, philo->id, str);
 }

@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:38 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int				ft_atoi(const char *str);
 int				ft_isdigit(int c);
 void			ft_usleep(long int time_in_ms);
 long			ft_atol(const char *str);
-long			actual_time(void);
+long			time_now(void);
 
 #endif

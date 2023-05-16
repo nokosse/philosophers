@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:15 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:51:08 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_usleep(long int time_in_ms)
 	long int	start_time;
 
 	start_time = 0;
-	start_time = actual_time();
-	while ((actual_time() - start_time) < time_in_ms)
+	start_time = time_now();
+	while ((time_now() - start_time) < time_in_ms)
 		usleep(time_in_ms / 10);
 }
 

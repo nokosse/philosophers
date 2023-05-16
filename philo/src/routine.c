@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:27:13 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->sarg->mtx_print);
 	print_status("is eating\n", philo);
 	pthread_mutex_lock(&philo->sarg->mtx_time_eat);
-	philo->last_eat = actual_time();
+	philo->last_eat = time_now();
 	pthread_mutex_unlock(&philo->sarg->mtx_time_eat);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	ft_usleep(philo->sarg->time2eat);

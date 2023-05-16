@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:32:43 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	init_philo(t_struct *st)
 	int	i;
 
 	i = 0;
-	st->arg.time_start = actual_time();
+	st->arg.time_start = time_now();
 	st->arg.flag = 0;
 	st->arg.satiated_philos = 0;
 	init_mutex(st);
