@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 10:58:57 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:21:54 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ int	init_philo(t_struct *st)
 	return (1);
 }
 
+// This function first wait for the simulation to finish.
+// Once the simulation is finished (someone is dead or everyone is satiated),
+// it will join the threads and then destroy the mutexes.
+// And finally free the philo structure.
 void	free_all(t_struct *st)
 {
 	int	i;

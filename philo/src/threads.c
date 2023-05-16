@@ -6,12 +6,18 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 12:05:43 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:25:34 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+// This function is the monitoring thread.
+// It is ran by each philo. Meaning if there is 9 philo thread, there will be
+// 9 monitoring thread.
+// This function is checking if the philo (philo[i]) is dead with check_death.
+// If he is dead, it will call dying and dying will write the dying message and
+// set the flag to 1, stopping the loop to run, same for the others monitors.
 void	*monitoring(void	*data)
 {
 	t_philo					*philo;
@@ -65,6 +71,9 @@ void	*thread(void *data)
 	return (0);
 }
 
+// This function will be called once, it will launch the threads.
+// If in our structure, nb_philo = 9, it will create 
+// 9 monitoring thread and 9 philo thread.
 int	threading(t_struct *st)
 {
 	int	i;
