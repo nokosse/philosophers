@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:28:16 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:36:52 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 // We malloc only philo because there is threads in this structure (t_philo),
 // and threads need to be malloced but mutexes don't need to be malloced.
+
+// TODO : Have only 1 monitoring thread instead of 1 per philo.
+// TODO : Fix data races (valgrind --tool=helgrind)
 
 int	main(int ac, char **av)
 {
