@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:23:04 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	free_all(t_struct *st)
 	while (i < st->arg.nb_philo)
 	{
 		pthread_join(st->philo[i].thread_id, NULL);
-		pthread_join(st->philo[i].thread_death_id, NULL);
 		i++;
 	}
 	pthread_mutex_destroy(&st->arg.mtx_print);

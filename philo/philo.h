@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:45:29 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ typedef struct s_arg
 //
 // There is 2 threads in the program :
 // thread_id: Each philos is represented by a thread, this is the thread.
-// thread_death_id: It's the monitoring thread, it's checking the death status.
-//
 // There is also 2 mutexes, which are the forks of the philos.
 typedef struct s_philo
 {
@@ -64,7 +62,6 @@ typedef struct s_philo
 	int						meals_eaten;
 	long int				last_eat;
 	pthread_t				thread_id;
-	pthread_t				thread_death_id;
 	pthread_mutex_t			*right_fork;
 	pthread_mutex_t			left_fork;
 	t_arg					*sarg;

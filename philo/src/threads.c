@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:58:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:20:24 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // This function is checking if the philo (philo[i]) is dead with check_death.
 // If he is dead, it will call dying and dying will write the dying message and
 // set the flag to 1, stopping the loop to run, same for the others monitors.
-void	*monitoring(void	*data)
+void	*moni(void	*data)
 {
 	t_philo					*philo;
 
@@ -34,6 +34,40 @@ void	*monitoring(void	*data)
 			dying(philo);
 		pthread_mutex_unlock(&philo->sarg->mtx_time_eat);
 		pthread_mutex_unlock(&philo->sarg->mtx_finish);
+	}
+	return (0);
+}
+
+// This function is a monitoring thread.
+// It is ran only one time in 'threading'.
+// This function is checking for each philo if he is dead with check_death.
+// If he is dead, it will call dying and dying will write the dying message and
+// set the flag to 1, stopping the loop to run.
+void	*monitoring(void *data)
+{
+	t_struct	*st;
+	t_philo		*philo;
+	int			i;
+
+	st = (t_struct *)data;
+	i = 0;
+	while (i < st->arg.nb_philo)
+	{
+		philo = &st->philo[i];
+		while (st->arg.flag == 0)
+		{
+			ft_usleep(1);
+			pthread_mutex_lock(&st->arg.mtx_time_eat);
+			pthread_mutex_lock(&st->arg.mtx_finish);
+			if (!check_death(philo, 0) && !philo->finish
+				&& (time_now() - philo->last_eat) >= (long)(st->arg.time2die))
+			{
+				dying(philo);
+			}
+			pthread_mutex_unlock(&st->arg.mtx_time_eat);
+			pthread_mutex_unlock(&st->arg.mtx_finish);
+		}
+		i++;
 	}
 	return (0);
 }
@@ -75,23 +109,23 @@ void	*thread(void *data)
 }
 
 // This function will be called once, it will launch the threads.
-// If in our structure, nb_philo = 9, it will create 
-// 9 monitoring thread and 9 philo thread.
+// If in our structure, nb_philo = 9, it will create 9 threads.
+// It will also create only one monitoring thread.
 int	threading(t_struct *st)
 {
-	int	i;
+	int			i;
+	pthread_t	monithread;
 
 	i = 0;
 	while (i < st->arg.nb_philo)
 	{
 		st->philo[i].sarg = &st->arg;
-		if (pthread_create(&st->philo[i].thread_death_id, NULL,
-				monitoring, &st->philo[i]) != 0)
-			return (0);
 		if (pthread_create(&st->philo[i].thread_id, NULL,
 				thread, &st->philo[i]) != 0)
 			return (0);
 		i++;
 	}
+	pthread_create(&monithread, NULL, monitoring, &st->philo);
+	pthread_join(monithread, NULL);
 	return (1);
 }
