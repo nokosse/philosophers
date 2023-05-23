@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 12:39:43 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:06:49 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	dying(t_philo *philo)
 	print_status("died 💀💀 👎😹👎 😂🤣\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	check_death(philo, 1);
+	pthread_mutex_lock(&philo->sarg->mtx_time_eat);
+	pthread_mutex_lock(&philo->sarg->mtx_finish);
 }
 
 void	thinking(t_philo *philo)
