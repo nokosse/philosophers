@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 10:09:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:54:48 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*monitoring(void *data)
 		philo = &st->philo[i];
 		while (st->arg.flag == 0)
 		{
-			ft_usleep(1);
+			ft_usleep(10);
 			pthread_mutex_lock(&st->arg.mtx_time_eat);
 			pthread_mutex_lock(&st->arg.mtx_finish);
 			if (!check_death(philo, 0) && !philo->finish
@@ -55,9 +55,9 @@ void	*monitoring(void *data)
 // the philo has done eaten enough, or if the philo is dead.
 // It will stop the loop if this is the case thanks to the
 // check_death function and the finish flag.
-void	*thread(void *data)
+void	*phithread(void *data)
 {
-	t_philo					*philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)data;
 	if (philo->id % 2 == 0)
@@ -74,6 +74,7 @@ void	*thread(void *data)
 			{
 				pthread_mutex_unlock(&philo->sarg->mtx_finish);
 				check_death(philo, 2);
+				pthread_mutex_lock(&philo->sarg->mtx_finish);
 			}
 			pthread_mutex_unlock(&philo->sarg->mtx_finish);
 			return (0);
@@ -95,7 +96,7 @@ int	threading(t_struct *st)
 	{
 		st->philo[i].sarg = &st->arg;
 		if (pthread_create(&st->philo[i].thread_id, NULL,
-				thread, &st->philo[i]) != 0)
+				phithread, &st->philo[i]) != 0)
 			return (0);
 		i++;
 	}

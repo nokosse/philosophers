@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/17 13:23:04 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:23:22 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_arg(int argc, char **argv, t_struct *st)
 // This function initialize the mutexes.
 // We have 4 mutexes:
 // 1. mtx_print: to print the messages.
-// 2. mtx_dead: to check if someone is dead.
+// 2. mtx_flag: to check if someone is dead.
 // 3. mtx_time_eat: to check if someone is eating.
 // 4. mtx_finish: to check if someone is finished.
 // We need these mutexes because we want to protect the variables to be
@@ -38,7 +38,7 @@ void	init_arg(int argc, char **argv, t_struct *st)
 void	init_mutex(t_struct *st)
 {
 	pthread_mutex_init(&st->arg.mtx_print, NULL);
-	pthread_mutex_init(&st->arg.mtx_dead, NULL);
+	pthread_mutex_init(&st->arg.mtx_flag, NULL);
 	pthread_mutex_init(&st->arg.mtx_time_eat, NULL);
 	pthread_mutex_init(&st->arg.mtx_finish, NULL);
 }

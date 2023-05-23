@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:38:00 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:48:11 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 // 1 is when a philo is dead.
 int	check_death(t_philo *philo, int i)
 {
-	pthread_mutex_lock(&philo->sarg->mtx_dead);
+	int	flag_value;
+
+	pthread_mutex_lock(&philo->sarg->mtx_flag);
 	if (i != 0)
 		philo->sarg->flag = i;
-	if (philo->sarg->flag)
-		return (pthread_mutex_unlock(&philo->sarg->mtx_dead), 1);
-	pthread_mutex_unlock(&philo->sarg->mtx_dead);
+	flag_value = philo->sarg->flag;
+	pthread_mutex_unlock(&philo->sarg->mtx_flag);
+	if (flag_value != 0)
+	{
+		return (1);
+	}
 	return (0);
 }
 

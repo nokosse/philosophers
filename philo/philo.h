@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/17 12:45:29 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:23:22 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_arg
 	int						flag;
 	long int				time_start;
 	pthread_mutex_t			mtx_print;
-	pthread_mutex_t			mtx_dead;
+	pthread_mutex_t			mtx_flag;
 	pthread_mutex_t			mtx_time_eat;
 	pthread_mutex_t			mtx_finish;
 }							t_arg;
