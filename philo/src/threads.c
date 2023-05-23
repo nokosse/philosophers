@@ -6,37 +6,11 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/19 12:20:24 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/23 10:09:00 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-// This function is the monitoring thread.
-// It is ran by each philo. Meaning if there is 9 philo thread, there will be
-// 9 monitoring thread.
-// This function is checking if the philo (philo[i]) is dead with check_death.
-// If he is dead, it will call dying and dying will write the dying message and
-// set the flag to 1, stopping the loop to run, same for the others monitors.
-void	*moni(void	*data)
-{
-	t_philo					*philo;
-
-	philo = (t_philo *)data;
-	while (philo->sarg->flag == 0)
-	{
-		ft_usleep(1);
-		pthread_mutex_lock(&philo->sarg->mtx_time_eat);
-		pthread_mutex_lock(&philo->sarg->mtx_finish);
-		if (!check_death(philo, 0) && !philo->finish
-			&& ((time_now() - philo->last_eat)
-				>= (long)(philo->sarg->time2die)))
-			dying(philo);
-		pthread_mutex_unlock(&philo->sarg->mtx_time_eat);
-		pthread_mutex_unlock(&philo->sarg->mtx_finish);
-	}
-	return (0);
-}
 
 // This function is a monitoring thread.
 // It is ran only one time in 'threading'.
