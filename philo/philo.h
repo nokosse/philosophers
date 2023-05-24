@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 11:23:22 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:20:23 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 // The 4 mutexes here are used to protect variables or functions.
 // mtx_print: It's used to protect the print function.
 //		So it can't be called by multiple threads at the same time.
-// mutex_dead: It's used to protect the 'flag' variable.
+// mtx_flag: It's used to protect the 'flag' variable.
 //		So it can't be changed (utils.c) by multiple threads at the same time.
-// mutex_time_eat: It's used to protect the 'last_eat' variable.
-// mutex_finish: It's used to protect the multiple functions and variables.
+// mtx_time_eat: It's used to protect the 'last_eat' variable.
+// mtx_finish: It's used to protect the multiple functions and variables.
 typedef struct s_arg
 {
 	int						nb_philo;
