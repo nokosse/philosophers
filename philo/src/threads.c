@@ -6,13 +6,15 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/11 17:12:14 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:14:39 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	monitor_check_flag(t_struct *st, t_philo *philo)
+// This function will make monitoring shoter to fit the norm.
+// All of this was litteraly written instead of the function call.
+void	monitor_flagger(t_struct *st, t_philo *philo)
 {
 	pthread_mutex_unlock(&philo->sarg->mtx_flag);
 	pthread_mutex_lock(&st->arg.mtx_time_eat);
@@ -48,7 +50,7 @@ void	*monitoring(void *data)
 			ft_usleep(10);
 			pthread_mutex_lock(&philo->sarg->mtx_flag);
 			if (philo->sarg->flag == 0)
-				monitor_check_flag(st, philo);
+				monitor_flagger(st, philo);
 			else
 			{
 				pthread_mutex_unlock(&philo->sarg->mtx_flag);
