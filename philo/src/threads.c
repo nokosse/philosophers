@@ -6,11 +6,26 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 13:05:41 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:12:14 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	monitor_check_flag(t_struct *st, t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->sarg->mtx_flag);
+	pthread_mutex_lock(&st->arg.mtx_time_eat);
+	pthread_mutex_lock(&st->arg.mtx_finish);
+	if (!check_death(philo, 0) && !philo->finish
+		&& (time_now() - philo->last_eat)
+		>= (long)(st->arg.time2die))
+	{
+		dying(philo);
+	}
+	pthread_mutex_unlock(&st->arg.mtx_time_eat);
+	pthread_mutex_unlock(&st->arg.mtx_finish);
+}
 
 // This function is a monitoring thread.
 // It is ran only one time in 'threading'.
@@ -28,18 +43,17 @@ void	*monitoring(void *data)
 	while (i < st->arg.nb_philo)
 	{
 		philo = &st->philo[i];
-		while (st->arg.flag == 0)
+		while (1)
 		{
 			ft_usleep(10);
-			pthread_mutex_lock(&st->arg.mtx_time_eat);
-			pthread_mutex_lock(&st->arg.mtx_finish);
-			if (!check_death(philo, 0) && !philo->finish
-				&& (time_now() - philo->last_eat) >= (long)(st->arg.time2die))
+			pthread_mutex_lock(&philo->sarg->mtx_flag);
+			if (philo->sarg->flag == 0)
+				monitor_check_flag(st, philo);
+			else
 			{
-				dying(philo);
+				pthread_mutex_unlock(&philo->sarg->mtx_flag);
+				break ;
 			}
-			pthread_mutex_unlock(&st->arg.mtx_time_eat);
-			pthread_mutex_unlock(&st->arg.mtx_finish);
 		}
 		i++;
 	}

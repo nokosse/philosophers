@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 13:03:23 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:04:37 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	check_death(t_philo *philo, int i)
 	pthread_mutex_lock(&philo->sarg->mtx_flag);
 	if (i != 0)
 	{
-		// FIX DATARACE HERE
 		philo->sarg->flag = i;
 	}
 	flag_value = philo->sarg->flag;
