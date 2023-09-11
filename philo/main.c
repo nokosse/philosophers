@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/17 12:36:52 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:57:07 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 // We malloc only philo because there is threads in this structure (t_philo),
 // and threads need to be malloced but mutexes don't need to be malloced.
-
-// TODO : Have only 1 monitoring thread instead of 1 per philo.
-// TODO : Fix data races (valgrind --tool=helgrind)
 
 int	main(int ac, char **av)
 {
@@ -39,6 +36,8 @@ int	main(int ac, char **av)
 // Use valgrind only to check leaks and not to compare the results !
 // valgrind --leak-check=full
 // valgrind --leak-check=full --show-leak-kinds=all
+
+// ./philo <nb_philo> <time_to_die> <time_to_eat> <time_to_sleep> <nb_meals>
 
 // No one should die tests :
 // ./philo 2 800 200 200 
