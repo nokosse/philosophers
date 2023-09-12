@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:47 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 10:04:17 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:57:51 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	monitor_flagger(t_struct *st, t_philo *philo)
 
 // This function is a monitoring thread.
 // It is ran only one time in 'threading'.
-// This function is checking for each philo if he is dead with check_death (in monitor_flagger).
-// If he is dead, it will call dying and dying will write the dying message and
-// set the flag to 1, stopping the loop to run.
+// This function is checking for each philo if he is dead 
+// with check_death (in monitor_flagger).
+// If he is dead, it will call dying and dying will write the 
+// dying message and set the flag to 1, stopping the loop to run.
 void	*monitoring(void *data)
 {
 	t_struct	*st;
