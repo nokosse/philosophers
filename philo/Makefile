@@ -6,7 +6,7 @@
 #    By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 17:27:37 by kvisouth          #+#    #+#              #
-#    Updated: 2023/05/22 13:49:06 by kvisouth         ###   ########.fr        #
+#    Updated: 2023/09/12 10:12:42 by kvisouth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main.c \
 	
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 HEADERS = philo.h
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -g
 CC = gcc
 
 all: $(NAME)
