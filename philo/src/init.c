@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 10:08:37 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:43:05 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_arg(int argc, char **argv, t_struct *st)
 // Data races, data inconsistency, memory corruption, etc..
 void	init_mutex(t_struct *st)
 {
+	pthread_mutex_init(&st->arg.mtx_print_status, NULL);
 	pthread_mutex_init(&st->arg.mtx_print, NULL);
 	pthread_mutex_init(&st->arg.mtx_flag, NULL);
 	pthread_mutex_init(&st->arg.mtx_time_eat, NULL);

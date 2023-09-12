@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 10:07:33 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:43:50 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,9 @@ void	print_status(char *str, t_philo *philo)
 
 	time = time_now() - philo->sarg->time_start;
 	if (!check_death(philo, 0))
+	{
+		pthread_mutex_lock(&philo->sarg->mtx_print_status);
 		printf("%ld %d %s", time, philo->id, str);
+		pthread_mutex_unlock(&philo->sarg->mtx_print_status);
+	}
 }
