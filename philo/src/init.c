@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:58 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 16:36:47 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:14:30 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,14 @@ void	free_all(t_struct *st)
 	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&st->arg.mtx_flag);
 	while (st->arg.flag == 0)
+	{
+		pthread_mutex_unlock(&st->arg.mtx_flag);
 		ft_usleep(1);
+		pthread_mutex_lock(&st->arg.mtx_flag);
+	}
+	pthread_mutex_unlock(&st->arg.mtx_flag);
 	while (i < st->arg.nb_philo)
 	{
 		pthread_join(st->philo[i].thread_id, NULL);
