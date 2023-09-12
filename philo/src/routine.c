@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/23 13:06:49 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:00:43 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	eating(t_philo *philo)
 	if (!philo->right_fork)
 	{
 		ft_usleep(philo->sarg->time2die * 2);
+		if (philo->sarg->nb_philo == 1)
+			pthread_mutex_unlock(&philo->left_fork);
 		return ;
 	}
 	pthread_mutex_lock(philo->right_fork);
