@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:11:32 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 17:04:32 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:06:28 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 // We malloc only philo because there is threads in this structure (t_philo),
 // and threads need to be malloced but mutexes don't need to be malloced.
 
-// TO FIX: helgrind : lock order violated (odd should take left then right)
-//                    (and even should take right then left) (?)
-// TO FIX: prints a status sometimes after a philo's death (200 400 200 200)
+// KNOWN ISSUE : Potential deadlock (fsanitize) / lock order violated (helgrind)
 int	main(int ac, char **av)
 {
 	t_struct		st;
