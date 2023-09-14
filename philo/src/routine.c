@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:13:05 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 18:11:54 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:57:51 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ void	dying(t_philo *philo)
 void	thinking(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->sarg->mtx_print);
-	print_status("is thinking\n", philo);
+	if (!check_death_iter(philo))
+		print_status("is thinking\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 }
 
 void	sleeping(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->sarg->mtx_print);
-	print_status("is sleeping\n", philo);
+	if (!check_death_iter(philo))
+		print_status("is sleeping\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	ft_usleep(philo->sarg->time2sleep);
 }
@@ -47,7 +49,8 @@ void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->left_fork);
 	pthread_mutex_lock(&philo->sarg->mtx_print);
-	print_status("has taken a fork\n", philo);
+	if (!check_death_iter(philo))
+		print_status("has taken a fork\n", philo);
 	pthread_mutex_unlock(&philo->sarg->mtx_print);
 	if (!philo->right_fork)
 	{

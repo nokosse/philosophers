@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:11 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 16:56:51 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:57:13 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ int	check_death(t_philo *philo, int i)
 	if (flag_value != 0)
 	{
 		return (1);
+	}
+	return (0);
+}
+
+int	check_death_iter(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->sarg->nb_philo)
+	{
+		pthread_mutex_lock(&philo->sarg->mtx_flag);
+		if (philo->sarg->flag != 0)
+		{
+			pthread_mutex_unlock(&philo->sarg->mtx_flag);
+			return (1);
+		}
+		pthread_mutex_unlock(&philo->sarg->mtx_flag);
+		i++;
 	}
 	return (0);
 }

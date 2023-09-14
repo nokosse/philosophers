@@ -6,7 +6,7 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:07:36 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/09/12 15:42:37 by kvisouth         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:52:45 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			free_all(t_struct *st);
 // Functions
 int				threading(t_struct *st);
 int				check_death(t_philo *philo, int i);
+int				check_death_iter(t_philo *philo);
 void			routine(t_philo *philo);
 void			dying(t_philo *philo);
 void			thinking(t_philo *philo);
