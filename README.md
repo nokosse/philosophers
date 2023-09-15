@@ -1,1 +1,1 @@
-The only issue is a possible deadlock if you put 2 philos and put 1 ms in time_to_eat and time_to_sleep but you can't test these values under 60 according to the defense instructions. So a deadlock is impossible in the defense but possible in the code
+The only issue is a potential deadlock if you put 2 philos and put 1 ms in time_to_eat and time_to_sleep but you can't test these values under 60 according to the defense instructions. So a deadlock is impossible in the defense but possible in the code
