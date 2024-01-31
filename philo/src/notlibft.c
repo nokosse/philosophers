@@ -6,17 +6,19 @@
 /*   By: kvisouth <kvisouth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:12:15 by kvisouth          #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:46 by kvisouth         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:08:27 by kvisouth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-// We created our own usleep function because the original usleep function is
-// not very accurate. The original function is sometimes rounding the time to
-// the nearest interger. It depends on the system.
-// With ft_usleep, we can have a more accurate usleep function.
-// Thanks to the loop that compares the actual time with the start time.
+/*
+We created our own usleep function because the original usleep function is
+not very accurate. The original function is sometimes rounding the time to
+the nearest interger. It depends on the system.
+With ft_usleep, we can have a more accurate usleep function.
+Thanks to the loop that compares the actual time with the start time.
+*/
 void	ft_usleep(long int time_in_ms)
 {
 	long int	start_time;
